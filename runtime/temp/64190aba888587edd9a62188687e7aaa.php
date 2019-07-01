@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1561607310;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1561705171;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -68,7 +68,7 @@
       </div>
       <xblock>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据： 23 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -85,34 +85,31 @@
             </tr>
         </thead>
         <tbody>
+          <?php foreach($orders as $v): ?>
           <tr>
-            <td>2017009171822298053</td>
-            <td>老王:18925139194</td>
-            <td>7829.10</td>
-            <td>7854.10</td>
-            <td>待确认</td>
-            <td>其他方式</td>
-            <td>申通物流</td>
-            <td>2017-08-17 18:22</td>
+            <td><?php echo $v['id']; ?></td>
+            <td><?php echo $v['lxren']; ?></td>
+            <td><?php echo $v['total']; ?></td>
+            <td><?php echo $v['total']; ?></td>
+            <td><?php echo $v['state']; ?></td>
+            <td><?php echo $v['zhifu']; ?></td>
+            <td><?php echo $v['wuliu']; ?></td>
+            <td><?php echo $v['ctime']; ?></td>
             <td class="td-manage">
               <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                 <i class="layui-icon">&#xe63c;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'<?php echo $v['id']; ?>')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
           </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+         <?php echo $orders->render(); ?>
         </div>
       </div>
 
@@ -160,22 +157,26 @@
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
+              $.ajax({
+                    type:'get'
+                    ,url:"<?php echo url('admin/orders/delete'); ?>"
+                    ,data:{id,id}
+                    ,async:true
+                    ,dataType:'text'
+                    ,success:function(data){
+                        if(data>0){
+                            alert('删除成功');
+                        }else{
+                            alert('删除失败');
+                        }
+                    }
+                    ,error:function(){
+                        alert('请求失败')
+                    }
+              })
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
           });
-      }
-
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
       }
     </script>
     <script>var _hmt = _hmt || []; (function() {

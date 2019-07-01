@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1561607203;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1561683690;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,44 +58,27 @@
             <th>操作</th></tr>
         </thead>
         <tbody>
+          <?php foreach($user as $v): ?>
           <tr>
-            <td>1</td>
-            <td>小明</td>
-            <td>男</td>
-            <td>13000000000</td>
-            <td>admin@mail.com</td>
-            <td>北京市 海淀区</td>
-            <td>2017-01-01 11:11:42</td>
+            <td><?php echo $v['id']; ?></td>
+            <td><?php echo $v['name']; ?></td>
+            <td><?php echo $v['sex']; ?></td>
+            <td><?php echo $v['phone']; ?></td>
+            <td><?php echo $v['mailbox']; ?></td>
+            <td><?php echo $v['address']; ?></td>
+            <td><?php echo $v['ctime']; ?></td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
             <td class="td-manage">
               <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
                 <i class="layui-icon">&#xe601;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'<?php echo $v['id']; ?>')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>小明</td>
-            <td>男</td>
-            <td>13000000000</td>
-            <td>admin@mail.com</td>
-            <td>北京市 海淀区</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-            <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
       <div class="page">
@@ -151,25 +134,29 @@
 
       /*用户-删除*/
       function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
+          layer.confirm('确认要删除吗?',function(index){
+              $.ajax({
+                    type:'get'
+                    ,url:"<?php echo url('admin/user/delete'); ?>"
+                    ,data:{id,id}
+                    ,async:true
+                    ,dataType:'text'
+                    ,success:function(data){
+                        if(data>0){
+                            alert('删除成功');
+                        }else{
+                            alert('删除失败');
+                        }
+                    }
+                    ,error:function(){
+                        alert('请求失败')
+                    }
+              })
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
           });
       }
 
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
     </script>
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");
