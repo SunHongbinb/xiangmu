@@ -15,7 +15,8 @@ class Orders extends Base
             $where['name']=['like','%'.$data['name'].'%'] ;
         }
         $orders=db('orders')->where($where)->paginate(5,false,['query'=>$data]);
-        return view('',['orders'=>$orders]);
+        $arr=db('orders')->select();
+        return view('',['orders'=>$orders,'length'=>count($arr)]);
     }
     public function delete($id)
     {

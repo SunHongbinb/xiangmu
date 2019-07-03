@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1561683690;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1562122365;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147862;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>后台登录-X-admin2.2</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,16 +34,11 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          <input type="text" name="name" value="" placeholder="请输入用户名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
-      <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','add',600,400)"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-      </xblock>
+        <span class="x-right" style="line-height:40px">共有数据： <?php echo $length; ?>条</span>
       <table class="layui-table">
         <thead>
           <tr>
@@ -66,16 +61,26 @@
             <td><?php echo $v['phone']; ?></td>
             <td><?php echo $v['mailbox']; ?></td>
             <td><?php echo $v['address']; ?></td>
-            <td><?php echo $v['ctime']; ?></td>
+            <td><?php echo $v['ltime']; ?></td>
             <td class="td-status">
+              <?php if($v['state']==0): ?>
+              <span class="layui-btn layui-btn-disabled layui-btn-mini">已禁用</span></td>
+              <?php else: ?>
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+              <?php endif; ?>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+              <?php if($v['state']==0): ?>
+                <a onclick="member_stop(this,'<?php echo $v['id']; ?>')" href="javascript:;"  title="启用">
+                <i class="layui-icon">&#xe62f;</i>
+                </a>
+                <?php else: ?>
+                <a onclick="member_stop(this,'<?php echo $v['id']; ?>')" href="javascript:;"  title="禁用">
                 <i class="layui-icon">&#xe601;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'<?php echo $v['id']; ?>')" href="javascript:;">
+                </a>
+                <?php endif; ?>
+                <a title="删除" onclick="member_del(this,'<?php echo $v['id']; ?>')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
-              </a>
+                </a>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -83,12 +88,7 @@
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+          <?php echo $user->render(); ?>
         </div>
       </div>
 
@@ -110,23 +110,49 @@
 
        /*用户-停用*/
       function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
+          if($(obj).attr('title')=='启用'){
+            str="确认要启用吗?"
+          }else{
+            str='确认要停用吗?'
+          }
+          layer.confirm(str,function(index){
 
               if($(obj).attr('title')=='启用'){
+                $.ajax({
+                    type:'get'
+                    ,url: "<?php echo url('admin/user/state'); ?>"
+                    ,data:{id:id,state:1}
+                    ,async:true
+                    ,dataType:'text'
+                    ,success:function(data){
+                        $(obj).attr('title','停用')
+                        $(obj).find('i').html('&#xe62f;');
 
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
+                        $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-normal').html('已启用');
+                        layer.msg('已启用!',{icon: 6,time:1000});
+                    }
+                    ,error:function(){
+                        alert('请求失败')
+                    }
+                })
               }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
+                $.ajax({
+                    type:'get'
+                    ,url: "<?php echo url('admin/user/state'); ?>"
+                    ,data:{id:id,state:0}
+                    ,async:true
+                    ,dataType:'text'
+                    ,success:function(data){
+                        $(obj).attr('title','启用')
+                        $(obj).find('i').html('&#xe601;');
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
+                        $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已禁用');
+                        layer.msg('已禁用!',{icon: 5,time:1000});
+                    }
+                    ,error:function(){
+                        alert('请求失败')
+                    }
+                })
               }
               
           });
@@ -143,7 +169,8 @@
                     ,dataType:'text'
                     ,success:function(data){
                         if(data>0){
-                            alert('删除成功');
+                            $(obj).parents("tr").remove();
+                            layer.msg('已删除!',{icon:1,time:1000});
                         }else{
                             alert('删除失败');
                         }
@@ -152,8 +179,7 @@
                         alert('请求失败')
                     }
               })
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              
           });
       }
 

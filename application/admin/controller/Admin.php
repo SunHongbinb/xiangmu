@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use think\Request;
 
 class Admin extends Base
 {
@@ -15,7 +16,8 @@ class Admin extends Base
             $where['name']=['like','%'.$data['name'].'%'] ;
         }
         $admin=db('admin')->where($where)->order('id desc')->paginate(5,false,['query'=>$data]);
-        return view('',['admin'=>$admin]);
+        $arr=db('admin')->select();
+        return view('',['admin'=>$admin,'length'=>count($arr)]);
     }
     public function delete($id)
     {
@@ -24,7 +26,7 @@ class Admin extends Base
     }
     public function edit($id)
     {
-        $arr=db('admin')->find();
+        $arr=db('admin')->find($id);
         return view('',['arr'=>$arr]);
     }
     public function state($id,$state)
@@ -45,13 +47,12 @@ class Admin extends Base
     public function add(){
         return view();
     }
-    // 执行添加
     public function insert(Request $request){
         $arr=input('post.');
-        $arr['ctime']=date();
-        dump($arr);
-        // $res=db('admin')->insert($arr);
-        // return $res;
+        unset($arr['repass']);
+        $arr['ctime']=date("Y-m-d",time());
+        $res=db('admin')->insert($arr);
+        return $res;
     }
 
 }

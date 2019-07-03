@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\login\index.html";i:1561620836;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\login\index.html";i:1562031495;}*/ ?>
 <!doctype html>
 <html  class="x-admin-sm">
 <head>
@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/login.css">
     <link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
@@ -52,11 +51,11 @@
                   ,dataType:"json"
                   ,success:function(data){
                     if (data.code>0) {
-                      layer.alert(data.info,{icon:6},function() {
+                      layer.msg(data.info,{icon:6},function() {
                         location.href="<?php echo url('admin/index/index'); ?>";
                       });
                     }else{
-                      layer.alert(data.info,{icon:5},function() {
+                      layer.msg(data.info,{icon:5},function() {
                         location.href="<?php echo url('admin/login/index'); ?>";
                       });
                     }

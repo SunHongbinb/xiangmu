@@ -15,11 +15,18 @@ class User extends Base
 	        $where['name']=['like','%'.$data['name'].'%'] ;
 	    }
 	    $user=db('user')->where($where)->order('id desc')->paginate(5,false,['query'=>$data]);
-	    return view('',['user'=>$user]);
+	    $arr=db('user')->select();
+	    return view('',['user'=>$user,'length'=>count($arr)]);
     }
     public function delete($id)
     {
         $res=db('user')->delete($id);
         return $res;
+    }
+    public function state($id,$state)
+    {
+        $res=db('user')->where('id',$id)->update(['state'=>"$state"]);
+        return $res;
+        
     }
 }

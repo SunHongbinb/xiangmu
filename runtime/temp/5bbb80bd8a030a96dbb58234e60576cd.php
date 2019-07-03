@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\edit.html";i:1561723393;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\edit.html";i:1561964998;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +29,7 @@
                   <span class="x-red">*</span>登录名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
+                  <input type="text" id="username" name="username" required="" lay-verify="required" readonly 
                   autocomplete="off" value="<?php echo $arr['username']; ?>" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -41,7 +41,7 @@
                   <span class="x-red">*</span>手机
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="<?php echo $arr['phone']; ?>" id="phone" name="phone" required="" lay-verify="phone"
+                  <input type="text" value="<?php echo $arr['phone']; ?>" id="phone" name="phone" required="" lay-verify="phone" readonly
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -53,7 +53,7 @@
                   <span class="x-red">*</span>邮箱
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="<?php echo $arr['email']; ?>" id="L_email" name="email" required="" lay-verify="email"
+                  <input type="text" value="<?php echo $arr['email']; ?>" readonly id="L_email" name="email" required="" lay-verify="email"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -125,7 +125,7 @@
 
           //监听提交
           form.on('submit(add)', function(data){
-            console.log($('form').serialize());
+            console.log(data);
             $.ajax({
                 type:'post'
                 ,url:'update'

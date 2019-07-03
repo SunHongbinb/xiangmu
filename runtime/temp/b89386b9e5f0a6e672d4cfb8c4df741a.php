@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\index.html";i:1561688497;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\index.html";i:1562137994;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147862;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>后台登录-X-admin2.2</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,12 +34,12 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so layui-form-pane">
-          <input class="layui-input" placeholder="分类名" name="cate_name">
+          <input class="layui-input" value="" placeholder="分类名" name="name">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>增加</button>
         </form>
       </div>
       <xblock>
-        <span class="x-right" style="line-height:40px">共有数据 : 88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据 : <?php echo $length; ?>条</span>
       </xblock>
       <table class="layui-table layui-form">
         <thead>
@@ -59,12 +59,20 @@
             </td>
             <td><?php echo $val['id']; ?></td>
             <td>
+              <?php echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",substr_count($val['path'],",")); if((in_array($val['id'],$pidarr))): ?>
               <i class="layui-icon x-show" status='true'>&#xe623;</i>
+              <?php else: ?>
+              <i class="layui-icon x-show" status='true'>|--</i>
+              <?php endif; ?>
               <?php echo $val['name']; ?>
             </td>
             <td><input type="text" class="layui-input x-sort" name="order" value="1"></td>
             <td>
-              <input type="checkbox" name="switch"  lay-text="开启|停用"  checked="member_stop()" lay-skin="switch">
+              <?php if(($val['state']==1)): ?>
+              <input type="checkbox" name="switch" id="<?php echo $val['id']; ?>" lay-text="开启|停用"  checked="member_stop()" lay-filter="switchTest" lay-skin="switch">
+              <?php else: ?>
+              <input type="checkbox" name="switch" id="<?php echo $val['id']; ?>" lay-text="开启|停用" lay-filter="switchTest" lay-skin="switch">
+              <?php endif; ?>
             </td>
             <td class="td-manage">
               <button class="layui-btn layui-btn layui-btn-xs"  onclick="x_admin_show('编辑','admin-edit.html')" ><i class="layui-icon">&#xe642;</i>编辑</button>
@@ -82,7 +90,30 @@
     <script>
       layui.use(['form'], function(){
         form = layui.form;
-        
+        form.on('switch(switchTest)', function(data){
+          console.log(data.elem.id);
+          $id=data.elem.id
+          console.log(this.checked ? '1' : '0');
+          $state=this.checked ? '1' : '0'
+          $.ajax({
+              type:'get'
+              ,url:"<?php echo url('admin/type/update'); ?>"
+              ,async:true
+              ,data:{id:$id,state:$state}
+              ,dataType:'text'
+              ,success:function(data){
+                                  
+              }
+              ,error:function(){
+                  
+              }
+          })
+
+            // layer.msg(this.checked ? '1' : '0', {
+            //   offset: '6px'
+            // });
+            // layer.tips('温馨提示', data.othis)
+          });   
       });
 
       /*用户-删除*/

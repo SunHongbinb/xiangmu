@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\add.html";i:1561727910;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\add.html";i:1562037880;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -74,8 +74,8 @@
           <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>角色</label>
               <div class="layui-input-block">
-                <input type="checkbox" name="state" value="2" lay-skin="primary" title="超级管理员" checked="">
-                <input type="checkbox" name="state" value="1" lay-skin="primary" title="普通管理员">
+                <input type="radio" name="state" value="2" lay-skin="primary" title="超级管理员" checked="">
+                <input type="radio" name="state" value="1" lay-skin="primary" title="普通管理员">
               </div>
           </div>
           <div class="layui-form-item">
@@ -131,27 +131,26 @@
 
           //监听提交
           form.on('submit(add)', function(data){
-            console.log(data.field);
             $.ajax({
                 type:'post'
-                ,url:"<?php echo url('admin/admin/add'); ?>"
-                ,data:data.field
-                ,async:true
+                ,url:'insert'
+                ,data:$('form').serialize()
                 ,dataType:'text'
-                ,success:function(data){
-                  alert(data);
-                    // layer.alert("增加成功", {icon: 6},function () {
-                    //     // 获得frame索引
-                    //     var index = parent.layer.getFrameIndex(window.name);
-                    //     //关闭当前frame
-                    //     parent.layer.close(index);
-                    // });
+                ,success:function(data)
+                {
+                  layer.alert("添加成功", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                      });
+
                 }
-                ,error:function(){
-                  alert('请求失败')
+                ,error:function()
+                {
+                  alert('失败')
                 }
             });
-            
             return false;
           });
           
@@ -163,7 +162,8 @@
         hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
-      })();</script>
+      })();
+    </script>
 
 </body>
     

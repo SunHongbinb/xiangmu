@@ -14,8 +14,10 @@ class Type extends Base
             $data['name']=input('get.name');
             $where['name']=['like','%'.$data['name'].'%'] ;
         }
-        $type=db('type')->where($where)->field(['id','pid','name','concat(path,id)'=>'ppp',])->order('ppp')->select();
-        return view('',['type'=>$type]);
+        $type=db('type')->where($where)->field(['id','pid','state','path','name','concat(path,id)'=>'paix',])->order('paix')->select();
+        $arr=db('type')->column('pid');
+
+        return view('',['type'=>$type,"pidarr"=>$arr,'length'=>count($arr)]);
     }
     public function delete($id)
     {
@@ -24,5 +26,12 @@ class Type extends Base
     	    $result=db('type')->delete($id);
     	    return $result;  
         }
+    }
+    public function update()
+    {
+        $state=input('get.state');
+        $id=input('get.id');
+        $res=db('type')->where('id',$id)->whereOr('pid',$id)->update(['state'=>$state]);
+        return $res;
     }
 }

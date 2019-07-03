@@ -13,12 +13,12 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so layui-form-pane">
-          <input class="layui-input" placeholder="分类名" name="cate_name">
+          <input class="layui-input" value="" placeholder="分类名" name="name">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>增加</button>
         </form>
       </div>
       <xblock>
-        <span class="x-right" style="line-height:40px">共有数据 : 88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据 : {$length}条</span>
       </xblock>
       <table class="layui-table layui-form">
         <thead>
@@ -38,12 +38,21 @@
             </td>
             <td>{$val.id}</td>
             <td>
+              {$val.path|substr_count=","|str_repeat="&nbsp;&nbsp;&nbsp;&nbsp;",###}
+              {if(in_array($val.id,$pidarr))}
               <i class="layui-icon x-show" status='true'>&#xe623;</i>
+              {else}
+              <i class="layui-icon x-show" status='true'>|--</i>
+              {/if}
               {$val.name}
             </td>
             <td><input type="text" class="layui-input x-sort" name="order" value="1"></td>
             <td>
-              <input type="checkbox" name="switch"  lay-text="开启|停用"  checked="member_stop()" lay-skin="switch">
+              {if($val.state==1)}
+              <input type="checkbox" name="switch" id="{$val.id}" lay-text="开启|停用"  checked="member_stop()" lay-filter="switchTest" lay-skin="switch">
+              {else}
+              <input type="checkbox" name="switch" id="{$val.id}" lay-text="开启|停用" lay-filter="switchTest" lay-skin="switch">
+              {/if}
             </td>
             <td class="td-manage">
               <button class="layui-btn layui-btn layui-btn-xs"  onclick="x_admin_show('编辑','admin-edit.html')" ><i class="layui-icon">&#xe642;</i>编辑</button>
@@ -61,7 +70,30 @@
     <script>
       layui.use(['form'], function(){
         form = layui.form;
-        
+        form.on('switch(switchTest)', function(data){
+          console.log(data.elem.id);
+          $id=data.elem.id
+          console.log(this.checked ? '1' : '0');
+          $state=this.checked ? '1' : '0'
+          $.ajax({
+              type:'get'
+              ,url:"{:url('admin/type/update')}"
+              ,async:true
+              ,data:{id:$id,state:$state}
+              ,dataType:'text'
+              ,success:function(data){
+                                  
+              }
+              ,error:function(){
+                  
+              }
+          })
+
+            // layer.msg(this.checked ? '1' : '0', {
+            //   offset: '6px'
+            // });
+            // layer.tips('温馨提示', data.othis)
+          });   
       });
 
       /*用户-删除*/

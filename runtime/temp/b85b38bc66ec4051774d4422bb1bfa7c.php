@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\welcome.html";i:1561543531;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\welcome.html";i:1562121134;}*/ ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,9 @@
     <body>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53</blockquote>
+            
+            <span class="x-red"><?php echo $user['name']; ?></span>！当前时间:<span id="time"></span></blockquote>
+            
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
             <div class="layui-field-box">
@@ -162,6 +164,23 @@
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
+
+        </script>
+        <script>
+            window.onload=function(){
+                //获取节点
+                time=document.getElementById('time')
+
+                //定义时间方法
+                function fun(){
+                    a=new Date()
+                    time.innerHTML=a.getFullYear()+'-'+(a.getMonth()+1)+'-'+a.getDate()+' &nbsp; '+a.getHours()+':'+a.getMinutes()+':'+a.getSeconds()
+                }
+                fun()
+                //间隔定时器setInterval(代码执行内容(只写方法名,不加括号),时间(毫秒))
+                setInterval(fun,1000)
+                
+            }
         </script>
     </body>
 </html>
