@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\unicode\index.html";i:1561606973;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\unicode\index.html";i:1561606973;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>后台登录-X-admin2.2</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,8 +10,8 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
       <style type="text/css">
 
@@ -399,8 +399,8 @@
       </style>
   
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>

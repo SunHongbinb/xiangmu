@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1562122365;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147862;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1562330429;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,13 +10,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -78,9 +78,6 @@
                 <i class="layui-icon">&#xe601;</i>
                 </a>
                 <?php endif; ?>
-                <a title="删除" onclick="member_del(this,'<?php echo $v['id']; ?>')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-                </a>
             </td>
           </tr>
           <?php endforeach; ?>
@@ -171,6 +168,8 @@
                         if(data>0){
                             $(obj).parents("tr").remove();
                             layer.msg('已删除!',{icon:1,time:1000});
+                            // 可以对父窗口进行刷新
+                                xadmin.father_reload();
                         }else{
                             alert('删除失败');
                         }

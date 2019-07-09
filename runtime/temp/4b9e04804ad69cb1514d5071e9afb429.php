@@ -1,27 +1,22 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\index.html";i:1562117023;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147512;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\index.html";i:1562655670;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>后台登录-X-admin2.2</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-
-<meta http-equiv="Content-Type" content="text/html; charset=gbk">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -64,7 +59,7 @@
           <tr>
             <td><?php echo $v['id']; ?></td>
             <td><?php echo $v['name']; ?></td>
-            <td><?php echo $v['username']; ?></td>
+            <td><?php echo $v['adminname']; ?></td>
             <td><?php echo $v['phone']; ?></td>
             <td><?php echo $v['email']; ?></td>
             <td><?php echo $v['ctime']; ?></td>
@@ -188,6 +183,8 @@
               })
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
+              // 可以对父窗口进行刷新
+               xadmin.father_reload();
           });
       }
     </script>

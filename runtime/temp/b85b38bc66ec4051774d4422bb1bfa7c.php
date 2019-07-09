@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\welcome.html";i:1562121134;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\welcome.html";i:1562642286;}*/ ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,8 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-        <link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+        <link rel="stylesheet" href="/static/admin/css/font.css">
+        <link rel="stylesheet" href="/static/admin/css/xadmin.css">
     </head>
     <body>
     <div class="x-body layui-anim layui-anim-up">

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\index.html";i:1562139232;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147862;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\index.html";i:1562580130;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,13 +10,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -42,7 +42,7 @@
             <a href="javascript:;">admin</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','<?php echo url('admin/admin/index'); ?>')">个人信息</a></dd>
-              <dd><a href="<?php echo url('admin/login/loginout  '); ?>">退出</a></dd>
+              <dd><a href="<?php echo url('admin/login/loginout'); ?>">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
@@ -142,6 +142,22 @@
                         <!-- <a _href="admin/index"> -->
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>评论管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                         <a _href="<?php echo url('comment/index'); ?>">
+                        <!-- <a _href="admin/index"> -->
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>评论列表</cite>
                         </a>
                     </li >
                 </ul>

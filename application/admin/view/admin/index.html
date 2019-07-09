@@ -1,3 +1,4 @@
+
 {extend name="base"}
 {block name="body"}
     <div class="x-nav">
@@ -38,7 +39,7 @@
           <tr>
             <td>{$v.id}</td>
             <td>{$v.name}</td>
-            <td>{$v.username}</td>
+            <td>{$v.adminname}</td>
             <td>{$v.phone}</td>
             <td>{$v.email}</td>
             <td>{$v.ctime}</td>
@@ -162,6 +163,8 @@
               })
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
+              // 可以对父窗口进行刷新
+               xadmin.father_reload();
           });
       }
     </script>

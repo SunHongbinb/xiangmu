@@ -57,9 +57,6 @@
                 <i class="layui-icon">&#xe601;</i>
                 </a>
                 {/if}
-                <a title="删除" onclick="member_del(this,'{$v.id}')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-                </a>
             </td>
           </tr>
           {/foreach}
@@ -150,6 +147,8 @@
                         if(data>0){
                             $(obj).parents("tr").remove();
                             layer.msg('已删除!',{icon:1,time:1000});
+                            // 可以对父窗口进行刷新
+                                xadmin.father_reload();
                         }else{
                             alert('删除失败');
                         }

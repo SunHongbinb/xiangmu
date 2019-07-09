@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\edit.html";i:1561964998;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\edit.html";i:1562655762;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>后台登录-X-admin2.2</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,13 +10,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -25,12 +25,12 @@
         <form class="layui-form">
           <div class="layui-form-item">
             <input type="hidden" name='id' value="<?php echo $_GET['id']; ?>">
-              <label for="username" class="layui-form-label">
+              <label for="adminname" class="layui-form-label">
                   <span class="x-red">*</span>登录名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required" readonly 
-                  autocomplete="off" value="<?php echo $arr['username']; ?>" class="layui-input">
+                  <input type="text" id="adminname" name="adminname" required="" lay-verify="required" readonly 
+                  autocomplete="off" value="<?php echo $arr['adminname']; ?>" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>将会成为您唯一的登入名
@@ -53,7 +53,7 @@
                   <span class="x-red">*</span>邮箱
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="<?php echo $arr['email']; ?>" readonly id="L_email" name="email" required="" lay-verify="email"
+                  <input type="text" value="<?php echo $arr['email']; ?>" id="L_email" name="email" required="" lay-verify="email"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">

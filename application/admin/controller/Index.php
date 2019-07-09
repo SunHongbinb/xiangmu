@@ -12,7 +12,7 @@ class Index extends Base
 
     public function welcome()
     {
-    	$user=session('user');
+    	$user=session('admin_user');
     	return view('',['user'=>$user]);
     }
 }

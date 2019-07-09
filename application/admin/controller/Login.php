@@ -13,7 +13,7 @@ class Login extends Controller
     public function dologin()
     {
         $arr=input('get.');
-        $user=db('admin')->where('username',$arr['username'])->find();
+        $user=db('admin')->where('adminname',$arr['adminname'])->find();
         if ($user==null) {
             return json(['code'=>'0','info'=>"账号不存在"]);
         }
@@ -21,13 +21,13 @@ class Login extends Controller
         if ($user['pass']!=$arr['pass']) {
             return json(['code'=>'0','info'=>"密码错误"]);
         }else{
-            session('user',$user);
+            session('admin_user',$user);
             return json(['code'=>'1','info'=>"登录成功"]);
         }
     }
     public function loginout()
     {
-        session(null,'think');
-        $this->redirect('/admin/login/index');
+        session(null);
+        return view('index');
     }
 }

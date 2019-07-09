@@ -27,11 +27,36 @@ class Type extends Base
     	    return $result;  
         }
     }
-    public function update()
+    public function state()
     {
         $state=input('get.state');
         $id=input('get.id');
         $res=db('type')->where('id',$id)->whereOr('pid',$id)->update(['state'=>$state]);
         return $res;
     }
+    public function add()
+    {
+        return view();
+    }
+    public function edit($id)
+    {
+        $arr=db('type')->find($id);
+        return view('',['arr'=>$arr]);
+    }
+    public function update()
+    {
+        $arr=input('post.'); 
+        $res=db('type')->where('id',$arr['id'])->update(['name'=>$arr['name']]);
+        return $res;
+        
+    }
+    public function insert()
+    {
+        $arr=input('post.');
+        $arr['state']='1';
+        dump($arr);
+        $res=db('type')->insert($arr);
+        return $res;
+    }
+
 }

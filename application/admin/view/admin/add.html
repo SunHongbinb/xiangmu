@@ -1,13 +1,14 @@
 {extend name="base"}
 {block name="body"}
+
     <div class="x-body">
         <form class="layui-form">
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="adminname" class="layui-form-label">
                   <span class="x-red">*</span>登录名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
+                  <input type="text" id="adminname" name="adminname" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -121,7 +122,7 @@
                         // 获得frame索引
                         var index = parent.layer.getFrameIndex(window.name);
                         //关闭当前frame
-                        parent.layer.close(index);
+                        parent.layer.close();
                       });
 
                 }

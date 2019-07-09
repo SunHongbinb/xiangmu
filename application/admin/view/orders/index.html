@@ -16,25 +16,17 @@
           <div class="layui-input-inline">
             <select name="contrller">
               <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
+              <option value="">已支付</option>
+              <option value="">未支付</option>
             </select>
           </div>
           <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
-              <option>货到付款</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
+            <select name="state">
               <option value="">订单状态</option>
               <option value="0">待确认</option>
               <option value="1">已确认</option>
               <option value="2">已收货</option>
-              <option value="3">已取消</option>
+              <option value="3">已评论</option>
               <option value="4">已完成</option>
               <option value="5">已作废</option>
             </select>
@@ -55,8 +47,8 @@
             <th>应付金额</th>
             <th>订单状态</th>
             <th>支付方式</th>
-            <th>配送方式</th>
             <th>下单时间</th>
+            <th >状态</th>
             <th >操作</th>
             </tr>
         </thead>
@@ -69,8 +61,18 @@
             <td>{$v.total}</td>
             <td>{$v.state}</td>
             <td>{$v.zhifu}</td>
-            <td>{$v.wuliu}</td>
             <td>{$v.addtime}</td>
+            <td class="td-status">
+                {if $v.state==0}
+                <a onclick="member_stop(this,'{$v.id}')" href="javascript:;"><span class="layui-btn layui-btn-normal layui-btn-mini">
+                    发货
+                </span></a>
+                {else}
+                <span class="layui-btn layui-btn-disabled layui-btn-mini">
+                    已发货
+                </span>
+                {/if}
+            </td>
             <td class="td-manage">
               <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                 <i class="layui-icon">&#xe63c;</i>
@@ -105,30 +107,31 @@
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
+        /*启用--停用*/
+     function member_stop(obj,id){
+          layer.confirm('确认要发货吗？',function(index){
+            $.ajax({
+                type:'get'
+                ,url:"{:url('admin/orders/state')}"
+                ,data:{id:id,state:'1'}
+                ,async:true
+                ,dataType:'text'
+                ,success:function(data){
+                    if(data>0){
+                        $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已发货');
+                        layer.msg('已发货!',{icon:1,time:1000});
+                    }else{
+                        layer.msg('修改失败!',{icon:2,time:1000});
+                    }
+                }
+                ,error:function(){
+                    alert('请求失败')
+                }
+            })
 
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
           });
       }
-
+            
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
@@ -141,7 +144,8 @@
                     ,dataType:'text'
                     ,success:function(data){
                         if(data>0){
-                            alert('删除成功');
+                              $(obj).parents("tr").remove();
+                              layer.msg('已删除!',{icon:1,time:1000});
                         }else{
                             alert('删除失败');
                         }
@@ -150,8 +154,6 @@
                         alert('请求失败')
                     }
               })
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
           });
       }
     </script>

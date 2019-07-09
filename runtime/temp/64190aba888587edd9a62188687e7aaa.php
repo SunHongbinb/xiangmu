@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1562146780;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1561606428;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1562645387;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>后台登录-X-admin2.2</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,13 +10,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -37,25 +37,17 @@
           <div class="layui-input-inline">
             <select name="contrller">
               <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
+              <option value="">已支付</option>
+              <option value="">未支付</option>
             </select>
           </div>
           <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
-              <option>货到付款</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
+            <select name="state">
               <option value="">订单状态</option>
               <option value="0">待确认</option>
               <option value="1">已确认</option>
               <option value="2">已收货</option>
-              <option value="3">已取消</option>
+              <option value="3">已评论</option>
               <option value="4">已完成</option>
               <option value="5">已作废</option>
             </select>
@@ -76,8 +68,8 @@
             <th>应付金额</th>
             <th>订单状态</th>
             <th>支付方式</th>
-            <th>配送方式</th>
             <th>下单时间</th>
+            <th >状态</th>
             <th >操作</th>
             </tr>
         </thead>
@@ -90,8 +82,18 @@
             <td><?php echo $v['total']; ?></td>
             <td><?php echo $v['state']; ?></td>
             <td><?php echo $v['zhifu']; ?></td>
-            <td><?php echo $v['wuliu']; ?></td>
             <td><?php echo $v['addtime']; ?></td>
+            <td class="td-status">
+                <?php if($v['state']==0): ?>
+                <a onclick="member_stop(this,'<?php echo $v['id']; ?>')" href="javascript:;"><span class="layui-btn layui-btn-normal layui-btn-mini">
+                    发货
+                </span></a>
+                <?php else: ?>
+                <span class="layui-btn layui-btn-disabled layui-btn-mini">
+                    已发货
+                </span>
+                <?php endif; ?>
+            </td>
             <td class="td-manage">
               <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                 <i class="layui-icon">&#xe63c;</i>
@@ -126,30 +128,31 @@
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
+        /*启用--停用*/
+     function member_stop(obj,id){
+          layer.confirm('确认要发货吗？',function(index){
+            $.ajax({
+                type:'get'
+                ,url:"<?php echo url('admin/orders/state'); ?>"
+                ,data:{id:id,state:'1'}
+                ,async:true
+                ,dataType:'text'
+                ,success:function(data){
+                    if(data>0){
+                        $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已发货');
+                        layer.msg('已发货!',{icon:1,time:1000});
+                    }else{
+                        layer.msg('修改失败!',{icon:2,time:1000});
+                    }
+                }
+                ,error:function(){
+                    alert('请求失败')
+                }
+            })
 
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
           });
       }
-
+            
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
@@ -162,7 +165,8 @@
                     ,dataType:'text'
                     ,success:function(data){
                         if(data>0){
-                            alert('删除成功');
+                              $(obj).parents("tr").remove();
+                              layer.msg('已删除!',{icon:1,time:1000});
                         }else{
                             alert('删除失败');
                         }
@@ -171,8 +175,6 @@
                         alert('请求失败')
                     }
               })
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
           });
       }
     </script>

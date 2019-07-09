@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\index.html";i:1562137994;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147862;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\index.html";i:1562330417;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,13 +10,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -32,14 +32,9 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-      <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so layui-form-pane">
-          <input class="layui-input" value="" placeholder="分类名" name="name">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>增加</button>
-        </form>
-      </div>
       <xblock>
-        <span class="x-right" style="line-height:40px">共有数据 : <?php echo $length; ?>条</span>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','<?php echo url('admin/type/add'); ?>?pid=0&path=0,',500)"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：  <?php echo $length; ?> 条</span>
       </xblock>
       <table class="layui-table layui-form">
         <thead>
@@ -75,8 +70,8 @@
               <?php endif; ?>
             </td>
             <td class="td-manage">
-              <button class="layui-btn layui-btn layui-btn-xs"  onclick="x_admin_show('编辑','admin-edit.html')" ><i class="layui-icon">&#xe642;</i>编辑</button>
-              <button class="layui-btn layui-btn-warm layui-btn-xs"  onclick="x_admin_show('编辑','admin-add.html')" ><i class="layui-icon">&#xe642;</i>添加子栏目</button>
+              <button class="layui-btn layui-btn layui-btn-xs"  onclick="x_admin_show('编辑','<?php echo url('admin/type/edit'); ?>?id=<?php echo $val['id']; ?>')" ><i class="layui-icon">&#xe642;</i>编辑</button>
+              <button class="layui-btn layui-btn-warm layui-btn-xs"  onclick="x_admin_show('编辑','<?php echo url('admin/type/add'); ?>?path=<?php echo $val['path']; ?><?php echo $val['id']; ?>,&pid=<?php echo $val['id']; ?>')" ><i class="layui-icon">&#xe642;</i>添加子栏目</button>
               <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'<?php echo $val['id']; ?>')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
             </td>
           </tr>
@@ -91,28 +86,24 @@
       layui.use(['form'], function(){
         form = layui.form;
         form.on('switch(switchTest)', function(data){
-          console.log(data.elem.id);
-          $id=data.elem.id
-          console.log(this.checked ? '1' : '0');
-          $state=this.checked ? '1' : '0'
-          $.ajax({
-              type:'get'
-              ,url:"<?php echo url('admin/type/update'); ?>"
-              ,async:true
-              ,data:{id:$id,state:$state}
-              ,dataType:'text'
-              ,success:function(data){
-                                  
-              }
-              ,error:function(){
-                  
-              }
-          })
+            console.log(data.elem.id);
+            $id=data.elem.id
+            console.log(this.checked ? '1' : '0');
+            $state=this.checked ? '1' : '0'
+            $.ajax({
+                type:'get'
+                ,url:"<?php echo url('admin/type/state'); ?>"
+                ,async:true
+                ,data:{id:$id,state:$state}
+                ,dataType:'text'
+                ,success:function(data){
+                    layer.msg('更改成功!',{time:1000});          
+                }
+                ,error:function(){
+                    
+                }
+            })
 
-            // layer.msg(this.checked ? '1' : '0', {
-            //   offset: '6px'
-            // });
-            // layer.tips('温馨提示', data.othis)
           });   
       });
 
@@ -130,35 +121,12 @@
                       layer.msg('已删除!',{icon:1,time:1000});               
                 }
                 ,error:function(){
-                    alert('该分类有子类,无法删除')
+                    alert('该分类有子类,无法删除');
                 }
               })
           });
-      }
+      } 
 
-      function member_stop(obj,id){
-               layer.confirm('确认要更改吗？',function(index){
-
-                   if($(obj).attr('title')=='停用'){
-                    $.get("<?php echo url('/admin/user/update'); ?>",{id:id,state:0})
-                     //发异步把用户状态进行更改
-                     $(obj).attr('title','启用')
-                     $(obj).find('i').html('&#xe62f;');
-
-                     $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                     layer.msg('已停用!',{icon: 5,time:1000});
-
-                   }else{
-                    $.get("<?php echo url('/admin/user/update'); ?>",{id:id,state:1})
-                     $(obj).attr('title','停用')
-                     $(obj).find('i').html('&#xe601;');
-
-                     $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                     layer.msg('已启用!',{icon: 6,time:1000});
-                   }
-                   
-               });
-           }
     </script>
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");

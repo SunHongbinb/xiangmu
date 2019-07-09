@@ -1,0 +1,70 @@
+{extend name="base"}
+{block name="body"}
+    <div class="x-body">
+        <form class="layui-form">
+          <div class="layui-form-item">
+          	<input type="hidden" name="path" value="{$_GET['path']}">
+          	<input type="hidden" name="pid" value="{$_GET['pid']}">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>分类名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="username" name="name" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>请输入分类名
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  增加
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+
+          //监听提交
+          form.on('submit(add)', function(data){
+            $.ajax({
+                type:'post'
+                ,url:'insert'
+                ,data:$('form').serialize()
+                ,dataType:'text'
+                ,success:function(data)
+                {
+                  layer.alert("添加成功", {icon: 6},function () {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        // 关闭当前frame
+                        parent.layer.close(index);
+
+                      });
+
+                }
+                ,error:function()
+                {
+                  alert('失败')
+                }
+            });
+            return false;
+          });
+          
+          
+        });
+    </script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+{/block}
