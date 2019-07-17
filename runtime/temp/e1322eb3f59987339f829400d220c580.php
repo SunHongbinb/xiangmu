@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\index.html";i:1562580130;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\index\index.html";i:1562816947;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
    
@@ -39,11 +38,7 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onclick="x_admin_show('个人信息','<?php echo url('admin/admin/index'); ?>')">个人信息</a></dd>
-              <dd><a href="<?php echo url('admin/login/loginout'); ?>">退出</a></dd>
-            </dl>
+            <a href="<?php echo url('admin/login/loginout'); ?>">退出</a>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
         </ul>

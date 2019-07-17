@@ -12,21 +12,14 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option value="">已支付</option>
-              <option value="">未支付</option>
-            </select>
-          </div>
+        <form class="layui-form layui-col-md12 x-so" >
           <div class="layui-input-inline">
             <select name="state">
               <option value="">订单状态</option>
               <option value="0">待确认</option>
               <option value="1">已确认</option>
-              <option value="2">已收货</option>
-              <option value="3">已评论</option>
+              <option value="2">已发货</option>
+              <option value="3">已收货</option>
               <option value="4">已完成</option>
               <option value="5">已作废</option>
             </select>
@@ -46,7 +39,7 @@
             <th>总金额</th>
             <th>应付金额</th>
             <th>订单状态</th>
-            <th>支付方式</th>
+            <th>商品</th>
             <th>下单时间</th>
             <th >状态</th>
             <th >操作</th>
@@ -59,17 +52,17 @@
             <td>{$v.lxren}</td>
             <td>{$v.total}</td>
             <td>{$v.total}</td>
-            <td>{$v.state}</td>
-            <td>{$v.zhifu}</td>
+            <td>{$state[$v.state]}</td>
+            <td>{$v.gid}</td>
             <td>{$v.addtime}</td>
             <td class="td-status">
-                {if $v.state==0}
+                {if $v.state==1}
                 <a onclick="member_stop(this,'{$v.id}')" href="javascript:;"><span class="layui-btn layui-btn-normal layui-btn-mini">
                     发货
                 </span></a>
                 {else}
                 <span class="layui-btn layui-btn-disabled layui-btn-mini">
-                    已发货
+                   {$state[$v.state]} 
                 </span>
                 {/if}
             </td>
@@ -113,7 +106,7 @@
             $.ajax({
                 type:'get'
                 ,url:"{:url('admin/orders/state')}"
-                ,data:{id:id,state:'1'}
+                ,data:{id:id,state:'2'}
                 ,async:true
                 ,dataType:'text'
                 ,success:function(data){

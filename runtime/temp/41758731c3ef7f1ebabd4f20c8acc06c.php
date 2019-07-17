@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\register\index.html";i:1561790158;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\register\index.html";i:1563263429;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,34 @@
 <meta name="description" content="DeathGhost" />
 <meta name="author" content="DeathGhost,deathghost@deathghost.cn">
 <link rel="icon" href="/static/index//static/index/images/icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" /><script src="/static/index/js/html5.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
+<style type="text/css">  
+.nocode {  
+  display: inline-block;
+    width: 100px;  
+    height: 25px;  
+}  
+  
+.code {  
+  display: inline-block;
+    color: #ff0000;  
+    font-family: Tahoma, Geneva, sans-serif;  
+    font-style: italic;  
+    font-weight: bold;  
+    text-align: center;  
+    width: 100px;  
+    height: 30px;  
+    line-height: 25px;
+    cursor: pointer;  
+    border:1px solid #e2b4a2;
+    background: #e2b4a2;
+}  
+  
+.input {  
+    width: 150px;  
+}  
+</style> 
+<script src="/static/index/js/html5.js"></script>
 <script src="/static/index/js/jquery.js"></script>
 <script>
 $(document).ready(function(){
@@ -78,47 +105,19 @@ $(document).ready(function(){
 <li class="category">
 <a>全部产品分类</a>
 <dl class="asideNav indexAsideNav">
-<dt><a href="channel.html">女装</a></dt>
-<dd>
-<a href="#">夏装新</a>
-<a href="#">连衣裙</a>
-<a href="#">T恤</a>
-<a href="#">衬衫</a>
-<a href="#">裤子</a>
-<a href="#">牛仔裤</a>
-<a href="#">背带裤</a>
-<a href="#">短外套</a>
-<a href="#">时尚外套</a>
-<a href="#">风衣</a>
-<a href="#">毛衣</a>
-<a href="#">背心</a>
-<a href="#">吊带</a>
-<a href="#">民族服装</a>
-</dd>
-<dt><a href="channel.html">男装</a></dt>
-<dd>
-<a href="#">衬衫</a>
-<a href="#">背心</a>
-<a href="#">西装</a>
-<a href="#">POLO衫</a>
-<a href="#">马夹</a>
-<a href="#">皮衣</a>
-<a href="#">毛衣</a>
-<a href="#">针织衫</a>
-<a href="#">牛仔裤</a>
-<a href="#">外套</a>
-<a href="#">夹克</a>
-<a href="#">卫衣</a>
-<a href="#">风衣</a>
-<a href="#">民族风</a>
-<a href="#">原创设计</a>
-<a href="#">大码</a>
-<a href="#">情侣装</a>
-<a href="#">开衫</a>
-<a href="#">运动裤</a>
-<a href="#">工装裤</a>
-</dd>
-</dl>
+
+
+    <?php foreach($arr as $value): ?>
+      <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
+      <dd>
+        <?php foreach($value['zi'] as $val): ?>
+          <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
+        <?php endforeach; ?>
+      </dd>
+    <?php endforeach; ?>
+
+
+    </dl>
 </li>
 <li>
 <a href="index.html" class="active">首页</a>
@@ -197,43 +196,38 @@ $(document).ready(function(){
         <a href="<?php echo url('login/index'); ?>" title="登录账号" class="fr">已有账号，立即登录？</a>
        </li>
        <li class="link_li">
-        <input type="submit" value="立即注册" class="sbmt_btn"/>
+        <input type="submit" id="check" value="立即注册" class="sbmt_btn"/>
        </li>
       </ul>
   </form>
 
-  <script>
-              function sub($this){
-                 // console.log($this.serialize());
-                 data=$this.serialize();
-                $.ajax({
-                  type:'post'
-                  ,url:"<?php echo url('index/register/add'); ?>"
-                  ,async:true
-                  ,data:data
-                  ,dataType:"json"
-                  ,success:function(data){
-                    if (data['code']==0) {
-                        // location.href="<?php echo url('index/index'); ?>";
-                        alert('该账号已被注册')
-                    }else if(data['code']==1){
-                      alert('两次密码不一致')
-                    }else if(data['code']==2){
-                      alert('注册成功')
-                        location.href="<?php echo url('login/index'); ?>";
-                    }
+       <script>
+            function sub($this){
+               data=$this.serialize();
+              $.ajax({
+                type:'post'
+                ,url:"<?php echo url('index/register/add'); ?>"
+                ,async:true
+                ,data:data
+                ,dataType:"json"
+                ,success:function(data){
+                  if (data['code']==0) {
+                      // location.href="<?php echo url('index/index'); ?>";
+                    alert('该账号已被注册')
+                  }else if(data['code']==1){
+                    alert('两次密码不一致')
+                  }else if(data['code']==2){
+                    alert('注册成功')
+                      location.href="<?php echo url('login/index'); ?>";
                   }
-                  ,error:function(data){
-                        // location.href='index.html'
-                        alert("连接失败")
-                  }
-                })
-              };
-
-    </script>
-
-
-
+                }
+                ,error:function(data){
+                      // location.href='index.html'
+                      alert("连接失败")
+                }
+              })
+            };
+       </script>
  </div>
 </section>
 <!--footer-->
@@ -300,4 +294,5 @@ $(document).ready(function(){
  </div>
 </footer>
 </body>
+<script src="/static/admin/js/jquery-1.12.3.min.js"></script>
 </html>

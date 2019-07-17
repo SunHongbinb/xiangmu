@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\lists\index.html";i:1561554114;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\lists\index.html";i:1562895187;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +20,6 @@ $(document).ready(function(){
     $(".asideNav").slideUp();
     });
   //冒泡
-  $(".favorite_list li a").click(function(){
-  alert("链接");
-  window.location.href='product.html';
-  });
   $(".favorite_list li .shop_collect_goods").click(function(){
   alert("收藏产品");
   event.stopPropagation();
@@ -38,20 +34,36 @@ $(document).ready(function(){
    <div class="topNavBg">
     <div class="wrap">
     <!--topLeftNav-->
+    <!-- 判断是否已登录 -->
+    <?php if(empty($_SESSION['think']['user'])): ?>
      <ul class="topLtNav">
-      <li><a href="/static/index/login.html" class="obviousText">亲，请登录</a></li>
-      <li><a href="/static/index/register.html">注册</a></li>
-      <li><a href="/static/index/#">移动端</a></li>
+      <li>
+          <a href="<?php echo url('login/index'); ?>" class=\"obviousText\">请登录</a>
+      </li>
+      <li>
+         <a href="<?php echo url('register/index'); ?>" class='obviousText'>注册</a>
+      </li>
      </ul>
-    <!--topRightNav-->
      <ul class="topRtNav">
-      <li><a href="/static/index/user.html">个人中心</a></li>
-      <li><a href="/static/index/cart.html" class="cartIcon">购物车<i>0</i></a></li>
-      <li><a href="/static/index/favorite.html" class="favorIcon">收藏夹</a></li>
-      <li><a href="/static/index/user.html">商家中心</a></li>
-      <li><a href="/static/index/article_read.html" class="srvIcon">客户服务</a></li>
-      <li><a href="/static/index/union_login.html">联盟管理</a></li>
+      <li><a href="<?php echo url('index/login/index'); ?>">个人中心</a></li>
+      <li><a href="<?php echo url('index/login/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
      </ul>
+     <?php else: ?>
+     <ul class="topLtNav">
+      <li>
+          <a href="<?php echo url('index/grzx/index'); ?>" class=\"obviousText\">欢迎您 :<?php echo \think\Session::get('user.name'); ?></a>
+      </li>
+      <li>
+          <!-- <?php echo \think\Session::get('user.id'); ?> -->
+          <a href="<?php echo url('index/login/loginout'); ?>?id=<?php echo \think\Session::get('user.id'); ?>" class='obviousText'>退出</a>
+      </li>
+     </ul>
+     <ul class="topRtNav">
+      <li><a href="<?php echo url('index/grzx/index'); ?>">个人中心</a></li>
+      <li><a href="<?php echo url('index/shopcar/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
+     </ul>
+     <?php endif; ?>
+    <!--topRightNav-->
     </div>
    </div>
    <!--logoArea-->
@@ -69,9 +81,9 @@ $(document).ready(function(){
       <li id="wenku">文库</li>
      </ul>
      <div class="searchBox">
-      <form>
+      <form action="<?php echo url('index/lists/index'); ?>" method="get">
        <div class="inputWrap">
-       <input type="text" placeholder="输入产品关键词或货号"/>
+       <input type="text" name="name" placeholder="输入产品关键词或货号"/>
        </div>
        <div class="btnWrap">
        <input type="submit" value="搜索"/>
@@ -84,78 +96,50 @@ $(document).ready(function(){
    <!--nav-->
    <nav>
       <ul class="wrap navList">
-      <li class="category">
-      <a>全部产品分类</a>
-      <dl class="asideNav indexAsideNav">
-      <dt><a href="/static/index/channel.html">女装</a></dt>
-      <dd>
-      <a href="/static/index/#">夏装新</a>
-      <a href="/static/index/#">连衣裙</a>
-      <a href="/static/index/#">T恤</a>
-      <a href="/static/index/#">衬衫</a>
-      <a href="/static/index/#">裤子</a>
-      <a href="/static/index/#">牛仔裤</a>
-      <a href="/static/index/#">背带裤</a>
-      <a href="/static/index/#">短外套</a>
-      <a href="/static/index/#">时尚外套</a>
-      <a href="/static/index/#">风衣</a>
-      <a href="/static/index/#">毛衣</a>
-      <a href="/static/index/#">背心</a>
-      <a href="/static/index/#">吊带</a>
-      <a href="/static/index/#">民族服装</a>
-      </dd>
-      <dt><a href="/static/index/channel.html">男装</a></dt>
-      <dd>
-      <a href="/static/index/#">衬衫</a>
-      <a href="/static/index/#">背心</a>
-      <a href="/static/index/#">西装</a>
-      <a href="/static/index/#">POLO衫</a>
-      <a href="/static/index/#">马夹</a>
-      <a href="/static/index/#">皮衣</a>
-      <a href="/static/index/#">毛衣</a>
-      <a href="/static/index/#">针织衫</a>
-      <a href="/static/index/#">牛仔裤</a>
-      <a href="/static/index/#">外套</a>
-      <a href="/static/index/#">夹克</a>
-      <a href="/static/index/#">卫衣</a>
-      <a href="/static/index/#">风衣</a>
-      <a href="/static/index/#">民族风</a>
-      <a href="/static/index/#">原创设计</a>
-      <a href="/static/index/#">大码</a>
-      <a href="/static/index/#">情侣装</a>
-      <a href="/static/index/#">开衫</a>
-      <a href="/static/index/#">运动裤</a>
-      <a href="/static/index/#">工装裤</a>
-      </dd>
-      </dl>
-      </li>
+        <li class="category">
+        <a>全部产品分类</a>
+        <dl class="asideNav indexAsideNav">
+
+
+        <?php foreach($type as $value): ?>
+          <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
+          <dd>
+            <?php foreach($value['zi'] as $val): ?>
+              <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
+            <?php endforeach; ?>
+          </dd>
+        <?php endforeach; ?>
+
+
+        </dl>
+    </li>
       <li>
-      <a href="/static/index/index.html" class="active">首页</a>
+        <a href="/static/index/index.html" class="active">首页</a>
       </li>
-      <li>
-      <a href="/static/index/#">时尚搭配</a>
-      </li>
-      <li>
-      <a href="/static/index/channel.html">原创设计</a>
-      </li>
-      <li>
-      <a href="/static/index/channel.html">时尚代购</a>
-      </li>
-      <li>
-      <a href="/static/index/channel.html">民族风</a>
-      </li>
-      <li>
-      <a href="/static/index/information.html">时尚搭配</a>
-      </li>
-      <li>
-      <a href="/static/index/library.html">搭配知识</a>
-      </li>
-      <li>
-      <a href="/static/index/#">促销专区</a>
-      </li>
-      <li>
-      <a href="/static/index/#">其他</a>
-      </li>
+        <li>
+        <a href="/static/index/#">时尚搭配</a>
+          </li>
+        <li>
+          <a href="/static/index/channel.html">原创设计</a>
+        </li>
+        <li>
+          <a href="/static/index/channel.html">时尚代购</a>
+        </li>
+        <li>
+          <a href="/static/index/channel.html">民族风</a>
+        </li>
+        <li>
+          <a href="/static/index/information.html">时尚搭配</a>
+        </li>
+        <li>
+          <a href="/static/index/library.html">搭配知识</a>
+        </li>
+        <li>
+          <a href="/static/index/#">促销专区</a>
+        </li>
+        <li>
+          <a href="/static/index/#">其他</a>
+        </li>
       </ul>
       </nav>
   </header>
@@ -238,135 +222,21 @@ $(document).ready(function(){
     <section class="shop_goods_li">
      <h2>店铺产品</h2>
       <ul class="favorite_list">
+        <?php foreach($arr as $val): ?>
        <li>
-        <a>
-         <img src="/static/index/upload/goods005.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
+          <a href="<?php echo url('index/detail/index'); ?>?id=<?php echo $val['id']; ?>">
+           <img src="/static/uploads/goods/<?php echo substr($val['picname'],0,strpos($val['picname'],',')); ?>"/>
+           <h3><?php echo $val['name']; ?></h3>
+           <p class="price"><span class="rmb_icon"><?php echo $val['price']; ?></span></p>
+          </a>
+           <a href="<?php echo url('index/grzx/addfavorite'); ?>?id=<?php echo $val['id']; ?>"><p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p></a>
        </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods010.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods009.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods008.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods006.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods004.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods003.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods006.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods004.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods003.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods002.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods006.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods004.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods003.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
-       <li>
-        <a>
-         <img src="/static/index/upload/goods002.jpg"/>
-         <h3>2019时尚新款</h3>
-         <p class="price"><span class="rmb_icon">298.00</span></p>
-         <p class="shop_collect_goods" title="收藏该产品"><span>&#115;</span></p>
-        </a>
-       </li>
+       <?php endforeach; ?>
+       
       </ul>
        <!--分页-->
        <div class="paging">
-        <a>第一页</a>
-        <a class="active">2</a>
-        <a>3</a>
-        <a>...</a>
-        <a>89</a>
-        <a>最后一页</a>
+        <?php echo $arr->render(); ?>
        </div>
     </section>
 
@@ -374,78 +244,14 @@ $(document).ready(function(){
  <aside class="rtWrap">
   <dl class="rtLiTwoCol">
    <dt>热门推荐</dt>
+   <?php foreach($s as $v): ?>
    <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods002.jpg"/>
-     <p>0.00</p>
+    <a href="<?php echo url('index/detail/index'); ?>?id=<?php echo $v['id']; ?>">
+     <img src="/static/uploads/goods/<?php echo substr($v['picname'],0,strpos($v['picname'],',')); ?>"/>
+     <p><?php echo $v['price']; ?></p>
     </a>
    </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods001.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods003.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods004.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods008.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods007.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods006.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods005.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods008.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods007.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods006.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
-   <dd>
-    <a href="/static/index/product.html">
-     <img src="/static/index/upload/goods005.jpg"/>
-     <p>0.00</p>
-    </a>
-   </dd>
+   <?php endforeach; ?>
   </dl>
  </aside>
 </section>

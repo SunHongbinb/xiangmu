@@ -8,7 +8,7 @@
                   <span class="x-red">*</span>分类名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="name" value="{$arr.name}" name="username" required="" lay-verify="required"
+                  <input type="text" id="name" value="{$arr.name}" name="name" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -46,11 +46,10 @@
                         //关闭当前frame
                         parent.layer.close(index);
                       });
-
-                }
+                 }
                 ,error:function()
                 {
-                  alert('失败')
+                  alert('修改失败')
                 }
             });
             return false;

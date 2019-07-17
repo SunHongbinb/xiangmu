@@ -17,7 +17,9 @@ class Login extends Controller
         if ($user==null) {
             return json(['code'=>'0','info'=>"账号不存在"]);
         }
-        
+        if ($user['state']==0){
+            return json(['code'=>'0','info'=>"账号已禁用"]);
+        }     
         if ($user['pass']!=$arr['pass']) {
             return json(['code'=>'0','info'=>"密码错误"]);
         }else{

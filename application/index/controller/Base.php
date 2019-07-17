@@ -1,5 +1,6 @@
 <?php
 namespace app\index\controller;
+session_start();
 use think\Controller;
 use think\Request;
 

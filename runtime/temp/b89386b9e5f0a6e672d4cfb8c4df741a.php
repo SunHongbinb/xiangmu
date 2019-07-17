@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\index.html";i:1562330417;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\index.html";i:1563248548;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
    
@@ -41,7 +40,6 @@
           <tr>
             <th width="20">
             </th>
-            <th width="70">ID</th>
             <th>栏目名</th>
             <th width="50">排序</th>
             <th width="50">状态</th>
@@ -52,7 +50,6 @@
           <tr cate-id='<?php echo $val['id']; ?>' fid='<?php echo $val['pid']; ?>' >
             <td>
             </td>
-            <td><?php echo $val['id']; ?></td>
             <td>
               <?php echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;",substr_count($val['path'],",")); if((in_array($val['id'],$pidarr))): ?>
               <i class="layui-icon x-show" status='true'>&#xe623;</i>
@@ -106,7 +103,7 @@
 
           });   
       });
-
+        
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗?',function(index){

@@ -10,12 +10,26 @@ class Shopcar extends Base
     // dump($uid);
     $res=Db::table('shopcar')->where('uid',$uid)->select();
     // dump($res);
-    return view('',['arr'=>$res]);
+    $snum=Db::table('shopcar')->where('uid',$uid)->select();
+    $shopnum=count($snum);
+    $arr=db('type')->where('pid',0)->select();
+    foreach($arr as $k => $v){
+      $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
+    }
+    return view('',['arr'=>$res,'shopnum'=>$shopnum,'ar'=>$arr]);
 
 
     // // $this->fetch需要继承
     // return $this->fetch();
   }
+
+
+    public function del(){
+      $gid=input('get.id');
+      $res=Db::table('shopcar')->where('id',$gid)->delete();
+      $this->redirect('index');
+    }
+
 
 
   public function add(){
@@ -29,8 +43,9 @@ class Shopcar extends Base
     $color=$arr['color'];
     $price=$a['price'];
     $num=$arr['num'];
+    $store=$arr['store'];
     $total=$price*$num;
-    $data=['name'=>$name,'uid'=>$uid,'size'=>$size,'color'=>$color,'price'=>$price,'num'=>$num,'price'=>$price,'total'=>$total,'picname'=>$picname];
+    $data=['name'=>$name,'uid'=>$uid,'size'=>$size,'color'=>$color,'price'=>$price,'num'=>$num,'price'=>$price,'total'=>$total,'picname'=>$picname,'store'=>$store,'gid'=>$id];
     $res=Db::name('shopcar')->insert($data);
     // $res=1;
     return $res;

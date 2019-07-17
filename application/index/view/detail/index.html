@@ -40,7 +40,7 @@ $(document).ready(function(){
   <div class="topNavBg">
    <div class="wrap">
    <!--topLeftNav-->
-   <!-- 判断是否已登录 -->
+       <!-- 判断是否已登录 -->
    {if $Think.session.user.name==null}
     <ul class="topLtNav">
      <li>
@@ -50,22 +50,24 @@ $(document).ready(function(){
         <a href="{:url('register/index')}" class='obviousText'>注册</a>
      </li>
     </ul>
+    <ul class="topRtNav">
+     <li><a href="{:url('index/login/index')}">个人中心</a></li>
+     <li><a href="{:url('index/login/index')}" class="cartIcon">购物车<i>0</i></a></li>
+    </ul>
     {else}
     <ul class="topLtNav">
      <li>
-         <a href="{:url('grzx/index')}" class=\"obviousText\">欢迎您 :{$Think.session.user.name}</a>
+         <a href="{:url('index/grzx/index')}" class=\"obviousText\">欢迎您 :{$Think.session.user.name}</a>
      </li>
      <li>
-         <!-- {$Think.session.user.id} -->
-         <a href="{:url('login/loginout')}?id={$Think.session.user.id}" class='obviousText'>退出</a>
+         <a href="{:url('index/login/loginout')}?id={$Think.session.user.id}" class='obviousText'>退出</a>
      </li>
     </ul>
-    {/if}
-   <!--topRightNav-->
     <ul class="topRtNav">
-     <li><a href="{:url('grzx/index')}">个人中心</a></li>
-     <li><a href="{:url('shopcar/index')}" class="cartIcon">购物车<i>0</i></a></li>
+     <li><a href="{:url('index/grzx/index')}">个人中心</a></li>
+     <li><a href="{:url('index/shopcar/index')}" class="cartIcon">购物车<i>{$shopnum}</i></a></li>
     </ul>
+    {/if}
    </div>
   </div>
   <!--logoArea-->
@@ -82,17 +84,22 @@ $(document).ready(function(){
      <li id="zixun">搭配</li>
      <li id="wenku">文库</li>
     </ul>
-    <div class="searchBox">
-     <form>
-      <div class="inputWrap">
-      <input type="text" placeholder="输入产品关键词或货号"/>
+
+
+      <!-- 搜索 -->
+      <div class="searchBox">
+       <form action="{:url('index/lists/index')}" method="get">
+        <div class="inputWrap">
+        <input type="text" name="name" value="" placeholder="输入产品关键词"/>
+        </div>
+        <div class="btnWrap">
+        <input type="submit" value="搜索"/>
+        </div>
+       </form>
       </div>
-      <div class="btnWrap">
-      <input type="submit" value="搜索"/>
-      </div>
-     </form>
-     <a href="__STATIC__/index/#" class="advancedSearch">高级搜索</a>
-    </div>
+
+
+
    </div>
   </div>
   <!--nav-->
@@ -100,75 +107,49 @@ $(document).ready(function(){
 <ul class="wrap navList">
 <li class="category">
 <a>全部产品分类</a>
+
+
+
 <dl class="asideNav indexAsideNav">
-<dt><a href="__STATIC__/index/channel.html">女装</a></dt>
-<dd>
-<a href="__STATIC__/index/#">夏装新</a>
-<a href="__STATIC__/index/#">连衣裙</a>
-<a href="__STATIC__/index/#">T恤</a>
-<a href="__STATIC__/index/#">衬衫</a>
-<a href="__STATIC__/index/#">裤子</a>
-<a href="__STATIC__/index/#">牛仔裤</a>
-<a href="__STATIC__/index/#">背带裤</a>
-<a href="__STATIC__/index/#">短外套</a>
-<a href="__STATIC__/index/#">时尚外套</a>
-<a href="__STATIC__/index/#">风衣</a>
-<a href="__STATIC__/index/#">毛衣</a>
-<a href="__STATIC__/index/#">背心</a>
-<a href="__STATIC__/index/#">吊带</a>
-<a href="__STATIC__/index/#">民族服装</a>
-</dd>
-<dt><a href="__STATIC__/index/channel.html">男装</a></dt>
-<dd>
-<a href="__STATIC__/index/#">衬衫</a>
-<a href="__STATIC__/index/#">背心</a>
-<a href="__STATIC__/index/#">西装</a>
-<a href="__STATIC__/index/#">POLO衫</a>
-<a href="__STATIC__/index/#">马夹</a>
-<a href="__STATIC__/index/#">皮衣</a>
-<a href="__STATIC__/index/#">毛衣</a>
-<a href="__STATIC__/index/#">针织衫</a>
-<a href="__STATIC__/index/#">牛仔裤</a>
-<a href="__STATIC__/index/#">外套</a>
-<a href="__STATIC__/index/#">夹克</a>
-<a href="__STATIC__/index/#">卫衣</a>
-<a href="__STATIC__/index/#">风衣</a>
-<a href="__STATIC__/index/#">民族风</a>
-<a href="__STATIC__/index/#">原创设计</a>
-<a href="__STATIC__/index/#">大码</a>
-<a href="__STATIC__/index/#">情侣装</a>
-<a href="__STATIC__/index/#">开衫</a>
-<a href="__STATIC__/index/#">运动裤</a>
-<a href="__STATIC__/index/#">工装裤</a>
-</dd>
+  <!-- 分类遍历 -->
+  {foreach $ar as $value}
+    <dt><a href="javascript:;">{$value.name}</a></dt>
+    <dd>
+      {foreach $value.zi as $val}
+        <a href="{:url('index/lists/index')}?id={$val.id}">{$val.name}</a>
+      {/foreach}
+    </dd>
+  {/foreach}
 </dl>
+
+
 </li>
 <li>
-<a href="__STATIC__/index/index.html" class="active">首页</a>
+<a href="{:url('index/index')}" class="active">首页</a>
 </li>
 <li>
-<a href="__STATIC__/index/#">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="__STATIC__/index/channel.html">原创设计</a>
+<a href="#">原创设计</a>
 </li>
 <li>
-<a href="__STATIC__/index/channel.html">时尚代购</a>
+<a href="#">时尚代购</a>
 </li>
 <li>
-<a href="__STATIC__/index/channel.html">民族风</a>
+<a href="#">民族风</a>
 </li>
 <li>
-<a href="__STATIC__/index/information.html">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="__STATIC__/index/library.html">搭配知识</a>
+<a href="#">搭配知识</a>
 </li>
 <li>
-<a href="__STATIC__/index/#">促销专区</a>
+<a href="#">促销专区</a>
 </li>
 <li>
-<a href="__STATIC__/index/#">其他</a>
+<a href="#">其他</a>
 </li>
 </ul>
 </nav>
@@ -205,23 +186,14 @@ $(document).ready(function(){
  <!--img:left-->
  <div class="gallery">
   <div>
-    <div id="preview" class="spec-preview"> <span class="jqzoom"><img jqimg="__STATIC__/index/upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" /></span> </div>
+    <div id="preview" class="spec-preview"> <span class="jqzoom"><img jqimg="__STATIC__/uploads/goods/{$picname[0]}" src="__STATIC__/uploads/goods/{$picname[0]}"  width="419px" height="420px"/></span> </div>
     <!--缩图开始-->
     <div class="spec-scroll"> <a class="prev">&lt;</a> <a class="next">&gt;</a>
       <div class="items">
         <ul>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goods004small.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
-          <li><img bimg="upload/goods.jpg" src="__STATIC__/index/upload/goodssmall.jpg" onmousemove="preview(this);"></li>
+          {foreach $picname as $v}
+          <li><img bimg="__STATIC__/uploads/goods/{$v}" src="__STATIC__/uploads/goods/{$v}" onmousemove="preview(this);"></li>
+          {/foreach}
         </ul>
       </div>
     </div>
@@ -245,7 +217,7 @@ $(document).ready(function(){
       ,success:function(data){
         if(data>0){
           alert('添加成功')
-          location.href="{:url('shopcar/index')}";
+          // location.href="{:url('shopcar/index')}";
         }else{
           alert('添加失败')
         }
@@ -259,11 +231,12 @@ $(document).ready(function(){
 </script>
 
   <form action="javascript:;" onsubmit="sub($(this))">
-    <input type="hidden" name="picname" value="{$picname}">
+    <input type="hidden" name="picname" value="{$picname[0]}">
     <input type="hidden" name="uid" value="{$Think.session.user.id}">
     <input type="hidden" name="id" value="{$arr.id}">
+    <input type="hidden" name="store" value="{$arr.store}">
     <div class="goods_infor">
-       <h2>2019女装新款 夏季时尚开衫 推荐款</h2>
+       <h2>{$arr.name}</h2>
        <ul>
         <li>
          <dl class="horizontal">
@@ -286,15 +259,15 @@ $(document).ready(function(){
         <li class="statistics">
          <dl class="vertical">
           <dt>月销量</dt>
-          <dd>20</dd>
+          <dd>{$arr.sales}</dd>
          </dl>
          <dl class="vertical">
           <dt>累计评论</dt>
-          <dd>198</dd>
+          <dd>{$comm}</dd>
          </dl>
          <dl class="vertical">
           <dt>关注</dt>
-          <dd>230</dd>
+          <dd>{$collect}</dd>
          </dl>
         </li>
         <li>
@@ -392,85 +365,30 @@ $(document).ready(function(){
   <ul class="item_tab">
    <li><a class="curr_li">商品详情</a></li>
    <li><a>商品评价（2893）</a></li>
-   <li><a>成交记录（1892）</a></li>
   </ul>
+
+
   <!--商品详情-->
   <div class="cont_wrap active">
-   该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓球桌等，为灾后及贫困地区的孩子们搭建课<br/>
-该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓球桌等，为灾
-  <img src="__STATIC__/index/upload/goods005.jpg"/><br/>
-   该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓球桌等，为灾后及贫困地区的孩子们搭建课<br/>
-该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓
+   {$arr.details}
   </div>
+
+
+
+
   <!--商品评价-->
   <div class="cont_wrap">
    <table class="table">
+
+  {foreach $comment as $v}
     <tr>
-     <td width="20%" align="center">李*锋</td>
-     <td width="60%">这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦</td>
-     <td width="20%" align="center"><time>2013-01-13 15:06</time></td>
+     <td width="20%" align="center">{$v.uname}</td>
+     <td width="60%">{$v.content}</td>
+     <td width="20%" align="center"><time>{$v.addtime}</time></td>
     </tr>
-    <tr>
-     <td width="20%" align="center">彭**法</td>
-     <td width="60%">这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦</td>
-     <td width="20%" align="center"><time>2013-01-13 15:06</time></td>
-    </tr>
-    <tr>
-     <td width="20%" align="center">代**彭</td>
-     <td width="60%">这里是评论内容哦这里是评论内容哦这里是评论内容哦容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦</td>
-     <td width="20%" align="center"><time>2013-01-13 15:06</time></td>
-    </tr>
-   </table>
-   <!--分页-->
-   <div class="paging">
-    <a>第一页</a>
-    <a class="active">2</a>
-    <a>3</a>
-    <a>...</a>
-    <a>89</a>
-    <a>最后一页</a>
-   </div>
-  </div>
-  <!--成交记录-->
-  <div class="cont_wrap">
-   <table class="table">
-    <tr>
-     <th>买家</th>
-     <th>产品属性</th>
-     <th>数量</th>
-     <th>成交时间</th>
-    </tr>
-    <tr>
-     <td align="center">李**强</td>
-     <td>
-      <p>颜色：黑色<p>
-      <p>规格：M<p>
-     </td>
-     <td align="center"><b>1</b></td>
-     <td align="center"><time>2013-01-13 15:25:39</time></td>
-    </tr>
-    <tr>
-     <td align="center">李**强</td>
-     <td>
-      <p>颜色：黑色<p>
-      <p>规格：L<p>
-     </td>
-     <td align="center"><b>1</b></td>
-     <td align="center"><time>2013-01-13 15:25:39</time></td>
-    </tr>
-    <tr>
-     <td align="center">葛**华</td>
-     <td>
-      <p>颜色：白色<p>
-      <p>规格：XL<p>
-     </td>
-     <td align="center"><b>5</b></td>
-     <td align="center"><time>2013-01-13 15:25:39</time></td>
-    </tr>
+  {/foreach}
+
+
    </table>
    <!--分页-->
    <div class="paging">
@@ -567,14 +485,14 @@ $(document).ready(function(){
  </ul>
  <dl class="wrap otherLink">
   <dt>友情链接</dt>
-  <dd><a href="#">17素材</a></dd>
+  <dd><a href="#" target="_blank">17素材</a></dd>
   <dd><a href="#">HTML5模块化后台管理模板</a></dd>
   <dd><a href="#">绿色清爽后台管理系统模板</a></dd>
   <dd><a href="#">黑色的cms商城网站后台管理模板</a></dd>
-  <dd><a href="#"_blank">前端博客</a></dd>
-  <dd><a href="#"_blank">博客</a></dd>
-  <dd><a href="#"_blank">新码笔记</a></dd>
-  <dd><a href="#"_blank">DethGhost</a></dd>
+  <dd><a href="#" target="_blank">前端博客</a></dd>
+  <dd><a href="#" target="_blank">博客</a></dd>
+  <dd><a href="#" target="_blank">新码笔记</a></dd>
+  <dd><a href="#" target="_blank">DethGhost</a></dd>
   <dd><a href="#">当当</a></dd>
   <dd><a href="#">优酷</a></dd>
   <dd><a href="#">土豆</a></dd>

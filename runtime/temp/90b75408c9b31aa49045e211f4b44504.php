@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\edit.html";i:1562291839;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562147862;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\edit.html";i:1563245155;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,14 +10,13 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/erqi/public/static/admin/css/font.css">
-	<link rel="stylesheet" href="/erqi/public/static/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/static/admin/css/font.css">
+	<link rel="stylesheet" href="/static/admin/css/xadmin.css">
     
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/erqi/public/static/admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/erqi/public/static/admin/js/xadmin.js"></script>
-
+    <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
 </head>
 <body>
    
@@ -29,7 +28,7 @@
                   <span class="x-red">*</span>分类名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="name" value="<?php echo $arr['name']; ?>" name="username" required="" lay-verify="required"
+                  <input type="text" id="name" value="<?php echo $arr['name']; ?>" name="name" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -67,11 +66,10 @@
                         //关闭当前frame
                         parent.layer.close(index);
                       });
-
-                }
+                 }
                 ,error:function()
                 {
-                  alert('失败')
+                  alert('修改失败')
                 }
             });
             return false;

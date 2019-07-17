@@ -17,22 +17,25 @@
                             ID
                         </th>
                         <th>
-                            回复者
+                            用户名
                         </th>
                         <th>
-                            回复内容
+                            商品名
                         </th>
                         <th>
-                            商品
+                            评分
                         </th>
                         <th>
                             评论
                         </th>
                         <th>
-                            回复时间
+                            回复人
                         </th>
                         <th>
-                            状态
+                            回复内容
+                        </th>
+                        <th>
+                            回复时间
                         </th>
                         <th>
                             操作
@@ -46,27 +49,34 @@
                         <td>
                             {$v.id}
                         </td>
-                        <td>
-                            {$v.uid}
+                        <td >
+                           {$user[$v.uid]} 
                         </td>
                         <td >
-                           这个很简单，你自己测试下就可以 
+                           {$goods[$v.gid]} 
                         </td>
                         <td >
-                           {$v.gid} 
-                        </td>
-                        <td >
-                            怎么在Windows下运行PHP
+                            {$v.level}
                         </td> 
-                        <td >
-                            {$v.addtime}
+                        <td>
+                            {$v.content}
                         </td>
-                        <td >
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                被采纳
-                            </span>
+                        <td>
+                            {$admin[$v.aid]}
+                        </td>
+                        <td id="reply" >
+                            {$v.reply?$v.reply:'';}
+                        </td>
+                        <td id="rtime">
+                            {$v.rtime?$v.rtime:'';}
                         </td>
                         <td class="td-manage">
+                            {if $v.state==0}
+                            <a title="回复"  onclick="x_admin_show('回复','{:url('admin/comment/add')}?id={$v.id}',500)" href="javascript:;">
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            {else}
+                            {/if}
                             <a title="删除" href="javascript:;" onclick="commemt_del(this,'1')" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
@@ -79,32 +89,12 @@
 
             <div class="page">{$comment->render()}</div>
         </div>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script src="./js/x-layui.js" charset="utf-8"></script>
+        <script src="__STATIC__/admin/lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="__STATIC__/admin/js/x-layui.js" charset="utf-8">
+        </script>
         <script>
-            layui.use(['element','laypage','layer','form'], function(){
-                $ = layui.jquery;//jquery
-              lement = layui.element();//面包导航
-              laypage = layui.laypage;//分页
-              layer = layui.layer;//弹出层
-              form = layui.form();//弹出层
 
-
-          })
-
-              
-
-              //以上模块根据需要引入
-
-            //批量删除提交
-             function delAll () {
-                layer.confirm('确认要删除吗？',function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
-                });
-             }
-            
-            
             /*删除*/
             function commemt_del(obj,id){
                 layer.confirm('确认要删除吗？',function(index){
@@ -113,14 +103,14 @@
                     layer.msg('已删除!',{icon:1,time:1000});
                 });
             }
-            </script>
-            <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
+        </script>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
         </script>
 {/block}

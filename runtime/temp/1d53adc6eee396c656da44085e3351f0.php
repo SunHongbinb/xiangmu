@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\comment\index.html";i:1562646451;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\comment\index.html";i:1563331160;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
    
@@ -38,22 +37,25 @@
                             ID
                         </th>
                         <th>
-                            回复者
+                            用户名
                         </th>
                         <th>
-                            回复内容
+                            商品名
                         </th>
                         <th>
-                            商品
+                            评分
                         </th>
                         <th>
                             评论
                         </th>
                         <th>
-                            回复时间
+                            回复人
                         </th>
                         <th>
-                            状态
+                            回复内容
+                        </th>
+                        <th>
+                            回复时间
                         </th>
                         <th>
                             操作
@@ -67,27 +69,33 @@
                         <td>
                             <?php echo $v['id']; ?>
                         </td>
-                        <td>
-                            <?php echo $v['uid']; ?>
+                        <td >
+                           <?php echo $user[$v['uid']]; ?> 
                         </td>
                         <td >
-                           这个很简单，你自己测试下就可以 
+                           <?php echo $goods[$v['gid']]; ?> 
                         </td>
                         <td >
-                           <?php echo $v['gid']; ?> 
-                        </td>
-                        <td >
-                            怎么在Windows下运行PHP
+                            <?php echo $v['level']; ?>
                         </td> 
-                        <td >
-                            <?php echo $v['addtime']; ?>
+                        <td>
+                            <?php echo $v['content']; ?>
                         </td>
-                        <td >
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                被采纳
-                            </span>
+                        <td>
+                            
+                        </td>
+                        <td id="reply" >
+                            <?php echo !empty($v['reply'])?$v['reply']:'';; ?>
+                        </td>
+                        <td id="rtime">
+                            <?php echo !empty($v['rtime'])?$v['rtime']:'';; ?>
                         </td>
                         <td class="td-manage">
+                            <?php if($v['state']==0): ?>
+                            <a title="回复"  onclick="x_admin_show('回复','<?php echo url('admin/comment/add'); ?>?id=<?php echo $v['id']; ?>',500)" href="javascript:;">
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            <?php else: endif; ?>
                             <a title="删除" href="javascript:;" onclick="commemt_del(this,'1')" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
@@ -100,32 +108,12 @@
 
             <div class="page"><?php echo $comment->render(); ?></div>
         </div>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script src="./js/x-layui.js" charset="utf-8"></script>
+        <script src="/static/admin/lib/layui/layui.js" charset="utf-8">
+        </script>
+        <script src="/static/admin/js/x-layui.js" charset="utf-8">
+        </script>
         <script>
-            layui.use(['element','laypage','layer','form'], function(){
-                $ = layui.jquery;//jquery
-              lement = layui.element();//面包导航
-              laypage = layui.laypage;//分页
-              layer = layui.layer;//弹出层
-              form = layui.form();//弹出层
 
-
-          })
-
-              
-
-              //以上模块根据需要引入
-
-            //批量删除提交
-             function delAll () {
-                layer.confirm('确认要删除吗？',function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
-                });
-             }
-            
-            
             /*删除*/
             function commemt_del(obj,id){
                 layer.confirm('确认要删除吗？',function(index){
@@ -134,15 +122,15 @@
                     layer.msg('已删除!',{icon:1,time:1000});
                 });
             }
-            </script>
-            <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
+        </script>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
         </script>
 
 </body>

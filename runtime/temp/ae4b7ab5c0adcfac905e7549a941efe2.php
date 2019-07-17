@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\add.html";i:1562655742;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\admin\add.html";i:1562817603;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -75,8 +75,10 @@
           <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>角色</label>
               <div class="layui-input-block">
-                <input type="radio" name="state" value="2" lay-skin="primary" title="超级管理员" checked="">
-                <input type="radio" name="state" value="1" lay-skin="primary" title="普通管理员">
+                <?php if($_SESSION['think']['admin_user']['state']==2): ?>
+                <input type="radio" name="state" value="2" lay-skin="primary" title="超级管理员">
+                <?php endif; ?>
+                <input type="radio" name="state" value="1" lay-skin="primary" title="普通管理员" checked="">
               </div>
           </div>
           <div class="layui-form-item">
@@ -139,12 +141,12 @@
                 ,dataType:'text'
                 ,success:function(data)
                 {
-                  layer.alert("添加成功", {icon: 6},function () {
-                        // 获得frame索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        //关闭当前frame
-                        parent.layer.close();
-                      });
+                    layer.alert("添加成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                    });
 
                 }
                 ,error:function()

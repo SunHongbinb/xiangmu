@@ -7,10 +7,13 @@ class Login extends Controller
   public function index(){
     //view不需要继承
     // return view();
-
+    $arr=db('type')->where('pid',0)->select();
+    foreach($arr as $k => $v){
+      $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
+    }
 
     // $this->fetch需要继承
-    return $this->fetch();
+    return view('',['arr'=>$arr]);
   }
 
   public function dologin(){

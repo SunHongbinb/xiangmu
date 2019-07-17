@@ -10,7 +10,15 @@ class Address extends Controller
     $a=Db::table('address')->where('uid','2')->order('id desc')->select();
     // dump($a) ;
     //view不需要继承
-    return view('',['arr'=>$a]);
+    //类别
+    $ss=db('type')->where('pid',0)->select();
+    foreach($ss as $k => $v){
+      $ss[$k]['zi']=db('type')->where('pid',$v['id'])->select();
+    }
+
+    $snum=Db::table('shopcar')->where('uid',$_SESSION['think']['user']['id'])->select();
+    $shopnum=count($snum);
+    return view('',['arr'=>$a,'ss'=>$ss,'shopnum'=>$shopnum]);
     // $this->fetch需要继承
   }
 
@@ -55,7 +63,15 @@ class Address extends Controller
       // dump($id);
       $a=Db::table('address')->where('id',$id)->select();
       // dump($a);
-      return view('',['arr'=>$a]);
+      //类别
+      $ss=db('type')->where('pid',0)->select();
+      foreach($ss as $k => $v){
+        $ss[$k]['zi']=db('type')->where('pid',$v['id'])->select();
+      }
+      //购物车商品数量
+      $snum=Db::table('shopcar')->where('uid',$_SESSION['think']['user']['id'])->select();
+      $shopnum=count($snum);
+      return view('',['arr'=>$a,'ss'=>$ss,'shopnum'=>$shopnum]);
 
   }
 

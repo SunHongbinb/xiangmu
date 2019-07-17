@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1562645387;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1562843308;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
    
@@ -33,21 +32,14 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option value="">已支付</option>
-              <option value="">未支付</option>
-            </select>
-          </div>
+        <form class="layui-form layui-col-md12 x-so" >
           <div class="layui-input-inline">
             <select name="state">
               <option value="">订单状态</option>
               <option value="0">待确认</option>
               <option value="1">已确认</option>
-              <option value="2">已收货</option>
-              <option value="3">已评论</option>
+              <option value="2">已发货</option>
+              <option value="3">已收货</option>
               <option value="4">已完成</option>
               <option value="5">已作废</option>
             </select>
@@ -67,7 +59,7 @@
             <th>总金额</th>
             <th>应付金额</th>
             <th>订单状态</th>
-            <th>支付方式</th>
+            <th>商品</th>
             <th>下单时间</th>
             <th >状态</th>
             <th >操作</th>
@@ -80,17 +72,17 @@
             <td><?php echo $v['lxren']; ?></td>
             <td><?php echo $v['total']; ?></td>
             <td><?php echo $v['total']; ?></td>
-            <td><?php echo $v['state']; ?></td>
-            <td><?php echo $v['zhifu']; ?></td>
+            <td><?php echo $state[$v['state']]; ?></td>
+            <td><?php echo $v['gid']; ?></td>
             <td><?php echo $v['addtime']; ?></td>
             <td class="td-status">
-                <?php if($v['state']==0): ?>
+                <?php if($v['state']==1): ?>
                 <a onclick="member_stop(this,'<?php echo $v['id']; ?>')" href="javascript:;"><span class="layui-btn layui-btn-normal layui-btn-mini">
                     发货
                 </span></a>
                 <?php else: ?>
                 <span class="layui-btn layui-btn-disabled layui-btn-mini">
-                    已发货
+                   <?php echo $state[$v['state']]; ?> 
                 </span>
                 <?php endif; ?>
             </td>
@@ -134,7 +126,7 @@
             $.ajax({
                 type:'get'
                 ,url:"<?php echo url('admin/orders/state'); ?>"
-                ,data:{id:id,state:'1'}
+                ,data:{id:id,state:'2'}
                 ,async:true
                 ,dataType:'text'
                 ,success:function(data){

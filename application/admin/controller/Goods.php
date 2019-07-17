@@ -53,11 +53,11 @@
         }
         public function delete($id)
         {
-            $list=db('goods')->find($id);
-            $pic=explode(",",$list['picname']);
-            for($i=0;$i<count($pic);$i++){
-                unlink("static/uploads/goods/".$pic[$i]);
-            }
+            // $list=db('goods')->find($id);
+            // $pic=explode(",",$list['picname']);
+            // for($i=0;$i<count($pic);$i++){
+            //     unlink("static/uploads/goods/".$pic[$i]);
+            // }
             $res=db('goods')->delete($id);
             return $res;
         }
@@ -69,7 +69,7 @@
                 $arr['picname']=$list['picname'];
             }else{
                 $picname=explode(",",$list['picname']);
-                for($i=1;$i>count($picname);$i++){
+                for($i=0;$i<count($picname)-1;$i++){
                     unlink("static/uploads/goods/".$picname[$i]);  
                 }
             }

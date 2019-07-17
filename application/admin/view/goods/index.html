@@ -145,7 +145,7 @@
                               $(obj).attr('title','下架')
                               $(obj).find('i').html('&#xe62f;');
 
-                              $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-normal').html('在售中');
+                              $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').addClass('layui-btn-normal').html('在售中');
                               layer.msg('已上架!',{icon: 6,time:1000});
                           }
                           ,error:function(){

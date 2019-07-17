@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:79:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\add.html";i:1562292764;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:79:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\add.html";i:1563249777;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
    
@@ -62,13 +61,12 @@
                 ,success:function(data)
                 {
                   layer.alert("添加成功", {icon: 6},function () {
-                        // 获得frame索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        // 关闭当前frame
-                        parent.layer.close(index);
-
-                      });
-
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    // 关闭当前frame
+                    parent.layer.close(index);
+                    $("html").load("index.html");
+                  });
                 }
                 ,error:function()
                 {

@@ -20,7 +20,6 @@
           <tr>
             <th width="20">
             </th>
-            <th width="70">ID</th>
             <th>栏目名</th>
             <th width="50">排序</th>
             <th width="50">状态</th>
@@ -31,7 +30,6 @@
           <tr cate-id='{$val.id}' fid='{$val.pid}' >
             <td>
             </td>
-            <td>{$val.id}</td>
             <td>
               {$val.path|substr_count=","|str_repeat="&nbsp;&nbsp;&nbsp;&nbsp;",###}
               {if(in_array($val.id,$pidarr))}
@@ -86,7 +84,7 @@
 
           });   
       });
-
+        
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗?',function(index){

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\goods\add.html";i:1562308694;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562642263;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:80:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\goods\add.html";i:1562731790;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/admin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/static/admin/js/xadmin.js"></script>
-
 </head>
 <body>
    
@@ -70,6 +69,14 @@
               </label>
               <div class="layui-input-inline">
                   <input type="text" name="name" value="" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>厂家
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" name="company" value="" class="layui-input">
               </div>
           </div>
           <div class="layui-form-item">
