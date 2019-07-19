@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\comment\add.html";i:1563331405;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\comment\add.html";i:1563437531;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,7 +26,7 @@
                     <textarea name="reply" id="reply" cols="45" rows="10"></textarea>
                 </div>
                 <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" >
-                <input type="text" name="aid" value="<?php echo $_SESSION['think']['admin_user']['id']; ?>">
+                <input type="hidden" name="aid" value="<?php echo $_SESSION['think']['admin_user']['id']; ?>">
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>

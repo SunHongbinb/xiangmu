@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\detail\index.html";i:1562914381;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\detail\index.html";i:1563355507;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +8,7 @@
 <meta name="description" content="DeathGhost" />
 <meta name="author" content="DeathGhost,deathghost@deathghost.cn">
 <link rel="icon" href="/static/index/images/icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
-<script src="/static/index/js/html5.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" /><script src="/static/index/js/html5.js"></script>
 <script src="/static/index/js/jquery.js"></script>
 <script src="/static/index/js/jquery.jqzoom.js"></script>
 <script src="/static/index/js/base.js"></script>
@@ -42,7 +41,7 @@ $(document).ready(function(){
   <div class="topNavBg">
    <div class="wrap">
    <!--topLeftNav-->
-   <!-- 判断是否已登录 -->
+       <!-- 判断是否已登录 -->
    <?php if(\think\Session::get('user.name')==null): ?>
     <ul class="topLtNav">
      <li>
@@ -52,22 +51,24 @@ $(document).ready(function(){
         <a href="<?php echo url('register/index'); ?>" class='obviousText'>注册</a>
      </li>
     </ul>
+    <ul class="topRtNav">
+     <li><a href="<?php echo url('index/login/index'); ?>">个人中心</a></li>
+     <li><a href="<?php echo url('index/login/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
+    </ul>
     <?php else: ?>
     <ul class="topLtNav">
      <li>
-         <a href="<?php echo url('grzx/index'); ?>" class=\"obviousText\">欢迎您 :<?php echo \think\Session::get('user.name'); ?></a>
+         <a href="<?php echo url('index/grzx/index'); ?>" class=\"obviousText\">欢迎您 :<?php echo \think\Session::get('user.name'); ?></a>
      </li>
      <li>
-         <!-- <?php echo \think\Session::get('user.id'); ?> -->
-         <a href="<?php echo url('login/loginout'); ?>?id=<?php echo \think\Session::get('user.id'); ?>" class='obviousText'>退出</a>
+         <a href="<?php echo url('index/login/loginout'); ?>?id=<?php echo \think\Session::get('user.id'); ?>" class='obviousText'>退出</a>
      </li>
     </ul>
-    <?php endif; ?>
-   <!--topRightNav-->
     <ul class="topRtNav">
-     <li><a href="<?php echo url('grzx/index'); ?>">个人中心</a></li>
-     <li><a href="<?php echo url('shopcar/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
+     <li><a href="<?php echo url('index/grzx/index'); ?>">个人中心</a></li>
+     <li><a href="<?php echo url('index/shopcar/index'); ?>" class="cartIcon">购物车<i><?php echo $shopnum; ?></i></a></li>
     </ul>
+    <?php endif; ?>
    </div>
   </div>
   <!--logoArea-->
@@ -84,17 +85,22 @@ $(document).ready(function(){
      <li id="zixun">搭配</li>
      <li id="wenku">文库</li>
     </ul>
-    <div class="searchBox">
-     <form>
-      <div class="inputWrap">
-      <input type="text" placeholder="输入产品关键词或货号"/>
+
+
+      <!-- 搜索 -->
+      <div class="searchBox">
+       <form action="<?php echo url('index/lists/index'); ?>" method="get">
+        <div class="inputWrap">
+        <input type="text" name="name" value="" placeholder="输入产品关键词"/>
+        </div>
+        <div class="btnWrap">
+        <input type="submit" value="搜索"/>
+        </div>
+       </form>
       </div>
-      <div class="btnWrap">
-      <input type="submit" value="搜索"/>
-      </div>
-     </form>
-     <a href="/static/index/#" class="advancedSearch">高级搜索</a>
-    </div>
+
+
+
    </div>
   </div>
   <!--nav-->
@@ -102,10 +108,12 @@ $(document).ready(function(){
 <ul class="wrap navList">
 <li class="category">
 <a>全部产品分类</a>
-  <dl class="asideNav indexAsideNav">
 
 
-  <?php foreach($array as $value): ?>
+
+<dl class="asideNav indexAsideNav">
+  <!-- 分类遍历 -->
+  <?php foreach($ar as $value): ?>
     <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
     <dd>
       <?php foreach($value['zi'] as $val): ?>
@@ -113,36 +121,36 @@ $(document).ready(function(){
       <?php endforeach; ?>
     </dd>
   <?php endforeach; ?>
+</dl>
 
 
-  </dl>
 </li>
 <li>
-<a href="/static/index/index.html" class="active">首页</a>
+<a href="<?php echo url('index/index'); ?>" class="active">首页</a>
 </li>
 <li>
-<a href="/static/index/#">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="/static/index/channel.html">原创设计</a>
+<a href="#">原创设计</a>
 </li>
 <li>
-<a href="/static/index/channel.html">时尚代购</a>
+<a href="#">时尚代购</a>
 </li>
 <li>
-<a href="/static/index/channel.html">民族风</a>
+<a href="#">民族风</a>
 </li>
 <li>
-<a href="/static/index/information.html">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="/static/index/library.html">搭配知识</a>
+<a href="#">搭配知识</a>
 </li>
 <li>
-<a href="/static/index/#">促销专区</a>
+<a href="#">促销专区</a>
 </li>
 <li>
-<a href="/static/index/#">其他</a>
+<a href="#">其他</a>
 </li>
 </ul>
 </nav>
@@ -179,15 +187,12 @@ $(document).ready(function(){
  <!--img:left-->
  <div class="gallery">
   <div>
-    <div id="preview" class="spec-preview" style="overflow: hidden;" > 
-      <span class="jqzoom">
-      <img width="420px" jqimg="/static/uploads/goods/<?php echo $pic[0]; ?>" src="/static/uploads/goods/<?php echo $pic[0]; ?>" /></span> 
-    </div>
+    <div id="preview" class="spec-preview"> <span class="jqzoom"><img jqimg="/static/uploads/goods/<?php echo $picname[0]; ?>" src="/static/uploads/goods/<?php echo $picname[0]; ?>"  width="419px" height="420px"/></span> </div>
     <!--缩图开始-->
     <div class="spec-scroll"> <a class="prev">&lt;</a> <a class="next">&gt;</a>
       <div class="items">
         <ul>
-          <?php foreach($pic as $v): ?>
+          <?php foreach($picname as $v): ?>
           <li><img bimg="/static/uploads/goods/<?php echo $v; ?>" src="/static/uploads/goods/<?php echo $v; ?>" onmousemove="preview(this);"></li>
           <?php endforeach; ?>
         </ul>
@@ -213,7 +218,7 @@ $(document).ready(function(){
       ,success:function(data){
         if(data>0){
           alert('添加成功')
-          location.href="<?php echo url('shopcar/index'); ?>";
+          // location.href="<?php echo url('shopcar/index'); ?>";
         }else{
           alert('添加失败')
         }
@@ -227,9 +232,10 @@ $(document).ready(function(){
 </script>
 
   <form action="javascript:;" onsubmit="sub($(this))">
-    <input type="hidden" name="picname" value="<?php echo $v; ?>">
+    <input type="hidden" name="picname" value="<?php echo $picname[0]; ?>">
     <input type="hidden" name="uid" value="<?php echo \think\Session::get('user.id'); ?>">
     <input type="hidden" name="id" value="<?php echo $arr['id']; ?>">
+    <input type="hidden" name="store" value="<?php echo $arr['store']; ?>">
     <div class="goods_infor">
        <h2><?php echo $arr['name']; ?></h2>
        <ul>
@@ -254,15 +260,15 @@ $(document).ready(function(){
         <li class="statistics">
          <dl class="vertical">
           <dt>月销量</dt>
-          <dd>20</dd>
+          <dd><?php echo $arr['sales']; ?></dd>
          </dl>
          <dl class="vertical">
           <dt>累计评论</dt>
-          <dd>198</dd>
+          <dd><?php echo $comm; ?></dd>
          </dl>
          <dl class="vertical">
           <dt>关注</dt>
-          <dd>230</dd>
+          <dd><?php echo $collect; ?></dd>
          </dl>
         </li>
         <li>
@@ -298,8 +304,7 @@ $(document).ready(function(){
           </dd>
          </dl>
         </li>
-        <li style="margin-top:50px;margin-left:20px; ">
-           <input type="button" value="加入收藏" class="buy_btn" onclick="sc()"/>
+        <li class="last_li">
            <input type="button" value="立即购买" class="buy_btn" onClick="javascript:location.href='cart.html'"/>
            <input type="submit" value="加入购物车" class="add_btn"/>
         </li>
@@ -320,9 +325,6 @@ $(document).ready(function(){
       }
       $this.next('input').val(num);
     }
-    function sc(){
-      alert(id);
-    }
 
     function rbtn($this){
       // alert('111')
@@ -339,6 +341,7 @@ $(document).ready(function(){
     }
 
 </script>
+
   <!--rt_infor-->
   <div class="shop_infor">
    <dl class="business_card">
@@ -363,85 +366,30 @@ $(document).ready(function(){
   <ul class="item_tab">
    <li><a class="curr_li">商品详情</a></li>
    <li><a>商品评价（2893）</a></li>
-   <li><a>成交记录（1892）</a></li>
   </ul>
+
+
   <!--商品详情-->
   <div class="cont_wrap active">
-   该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓球桌等，为灾后及贫困地区的孩子们搭建课<br/>
-该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓球桌等，为灾
-  <img src="/static/index/upload/goods005.jpg"/><br/>
-   该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓球桌等，为灾后及贫困地区的孩子们搭建课<br/>
-该商品参与了公益宝贝计划，卖家承诺每笔成交将为壹乐园计划捐赠0.02元。该商品已累积捐赠24560笔。
-善款用途简介：基于游戏教育在儿童成长中的重要性，壹基金设立了“壹乐园计划”，帮助提供滑梯、攀爬架、跷跷板、秋千、乒乓
+   <?php echo $arr['details']; ?>
   </div>
+
+
+
+
   <!--商品评价-->
   <div class="cont_wrap">
    <table class="table">
+
+  <?php foreach($comment as $v): ?>
     <tr>
-     <td width="20%" align="center">李*锋</td>
-     <td width="60%">这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦</td>
-     <td width="20%" align="center"><time>2013-01-13 15:06</time></td>
+     <td width="20%" align="center"><?php echo $v['uname']; ?></td>
+     <td width="60%"><?php echo $v['content']; ?></td>
+     <td width="20%" align="center"><time><?php echo $v['addtime']; ?></time></td>
     </tr>
-    <tr>
-     <td width="20%" align="center">彭**法</td>
-     <td width="60%">这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦</td>
-     <td width="20%" align="center"><time>2013-01-13 15:06</time></td>
-    </tr>
-    <tr>
-     <td width="20%" align="center">代**彭</td>
-     <td width="60%">这里是评论内容哦这里是评论内容哦这里是评论内容哦容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦这里是评论内容哦</td>
-     <td width="20%" align="center"><time>2013-01-13 15:06</time></td>
-    </tr>
-   </table>
-   <!--分页-->
-   <div class="paging">
-    <a>第一页</a>
-    <a class="active">2</a>
-    <a>3</a>
-    <a>...</a>
-    <a>89</a>
-    <a>最后一页</a>
-   </div>
-  </div>
-  <!--成交记录-->
-  <div class="cont_wrap">
-   <table class="table">
-    <tr>
-     <th>买家</th>
-     <th>产品属性</th>
-     <th>数量</th>
-     <th>成交时间</th>
-    </tr>
-    <tr>
-     <td align="center">李**强</td>
-     <td>
-      <p>颜色：黑色<p>
-      <p>规格：M<p>
-     </td>
-     <td align="center"><b>1</b></td>
-     <td align="center"><time>2013-01-13 15:25:39</time></td>
-    </tr>
-    <tr>
-     <td align="center">李**强</td>
-     <td>
-      <p>颜色：黑色<p>
-      <p>规格：L<p>
-     </td>
-     <td align="center"><b>1</b></td>
-     <td align="center"><time>2013-01-13 15:25:39</time></td>
-    </tr>
-    <tr>
-     <td align="center">葛**华</td>
-     <td>
-      <p>颜色：白色<p>
-      <p>规格：XL<p>
-     </td>
-     <td align="center"><b>5</b></td>
-     <td align="center"><time>2013-01-13 15:25:39</time></td>
-    </tr>
+  <?php endforeach; ?>
+
+
    </table>
    <!--分页-->
    <div class="paging">
@@ -538,14 +486,14 @@ $(document).ready(function(){
  </ul>
  <dl class="wrap otherLink">
   <dt>友情链接</dt>
-  <dd><a href="#">17素材</a></dd>
+  <dd><a href="#" target="_blank">17素材</a></dd>
   <dd><a href="#">HTML5模块化后台管理模板</a></dd>
   <dd><a href="#">绿色清爽后台管理系统模板</a></dd>
   <dd><a href="#">黑色的cms商城网站后台管理模板</a></dd>
-  <dd><a href="#"_blank">前端博客</a></dd>
-  <dd><a href="#"_blank">博客</a></dd>
-  <dd><a href="#"_blank">新码笔记</a></dd>
-  <dd><a href="#"_blank">DethGhost</a></dd>
+  <dd><a href="#" target="_blank">前端博客</a></dd>
+  <dd><a href="#" target="_blank">博客</a></dd>
+  <dd><a href="#" target="_blank">新码笔记</a></dd>
+  <dd><a href="#" target="_blank">DethGhost</a></dd>
   <dd><a href="#">当当</a></dd>
   <dd><a href="#">优酷</a></dd>
   <dd><a href="#">土豆</a></dd>

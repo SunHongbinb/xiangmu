@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\address\index.html";i:1563355286;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\address\edit.html";i:1563355261;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +63,7 @@ $(document).ready(function(){
   <div class="wrap logoSearch">
    <!--logo-->
    <div class="logo">
-      <a href="<?php echo url('index/index'); ?>"><h1><img src="/static/index/images/logo.png"/></h1></a>
+    <h1><img src="/static/index/images/logo.png"/></h1>
    </div>
    <!--search-->
    <div class="search">
@@ -73,7 +73,6 @@ $(document).ready(function(){
      <li id="zixun">搭配</li>
      <li id="wenku">文库</li>
     </ul>
-
 
 
     <div class="searchBox">
@@ -89,7 +88,6 @@ $(document).ready(function(){
 
 
 
-
    </div>
   </div>
   <!--nav-->
@@ -100,8 +98,6 @@ $(document).ready(function(){
      <dl class="asideNav indexAsideNav">
 
 
-
-
 <?php foreach($ss as $value): ?>
   <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
   <dd>
@@ -110,8 +106,6 @@ $(document).ready(function(){
     <?php endforeach; ?>
   </dd>
 <?php endforeach; ?>
-
-
 
 
      </dl>
@@ -168,69 +162,6 @@ $(document).ready(function(){
 
  </script>
 
-<script>
-    $(function(){
-        //省和直辖市的添加
-        $.post("<?php echo url('address/shuju'); ?>", {upid: 0}, function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var option=$("<option value="+data[i].id+">"+data[i].name+"</option>");
-                $("select").append(option);
-            }
-        },"json");
-
-        va='';
-        $("select").live('change',function(event) {
-
-          va+=$(this).val()+'@';
-            //去掉旧的选项
-            $(this).nextAll("select").remove();
-            //获取当前省的值
-            var val=$(this).val();
-            var ob=$(this);
-            $.post("<?php echo url('address/shuju'); ?>", {upid: val}, function(data) {
-                /*optional stuff to do after success */
-                //判断请求的数据是否为空
-                if (data.length>0) {
-                var select=$("<select class='select' name='bb'><option>--请选择--</option></select>");
-                ob.after(select);
-                for (var i = 0; i < data.length; i++) {
-                var option=$("<option value="+data[i].id+">"+data[i].name+"</option>");
-                select.append(option);
-                }
-
-            }
-            $('#ad').val(va);
-            // alert(va);
-            },'json');
-        });
-
-    });
-    </script>
-
-    <script>
-          function sub($this){
-             // console.log($this.serialize());
-             data=$this.serialize();
-             // alert(data);
-            $.ajax({
-              type:'post'
-              ,url:"<?php echo url('index/address/add'); ?>"
-              ,async:true
-              ,data:data
-              ,dataType:"text"
-              ,success:function(data){
-                // console.log(data)
-                alert('添加成功')
-                location.href="<?php echo url('address/index'); ?>";
-              }
-              ,error:function(data){
-                    // location.href='index.html'
-                    alert(data)
-              }
-            })
-          };
-    </script>
-
 <section class="wrap user_center_wrap">
  <!--左侧导航-->
   <aside class="user_aside_nav">
@@ -250,93 +181,58 @@ $(document).ready(function(){
   </dl>
 
 
-
  </aside>
  <!--右侧：内容区域-->
  <div class="user_rt_cont">
   <div class="top_title">
    <strong>我的地址列表</strong>
   </div>
-  <table class="order_table">
+    <script>
+        function mub($this){
+           console.log($this.serialize());
+           data=$this.serialize();
+           // alert(data);
+          $.ajax({
+            type:'post'
+            ,url:"<?php echo url('index/address/update'); ?>"
+            ,async:true
+            ,data:data
+            ,dataType:"text"
+            ,success:function(data){
+              // console.log(data)
+              alert('修改成功')
+              location.href="<?php echo url('address/index'); ?>";
+            }
+            ,error:function(data){
+                  // location.href='index.html'
+                  alert(data)
+            }
+          })
+        }
+    </script>
+    <form onsubmit='mub($(this))' action='javascript:;'>
+      <table class="order_table">
+       <tr>
+        <td width="100" align="right">收件人：</td>
+        <input type="hidden" name="id" value="<?php echo $arr['0']['id']; ?>">
+        <td><input type="text" name="name" value="<?php echo $arr['0']['name']; ?>" class="textbox"/></td>
+       </tr>
+       <tr>
+        <td width="100" align="right">联系电话：</td>
+        <td><input type="text" name="phone" value="<?php echo $arr['0']['phone']; ?>" class="textbox"/></td>
+       </tr>
+       <tr>
+        <td width="100" align="right">详细地址：</td>
+        <td><input type="text" name="address" value="<?php echo $arr['0']['address']; ?>" class="textbox textbox_295"/></td>
+       </tr>
+       <tr>
+        <td width="100" align="right"></td>
+        <td><input type="submit" value="更新保存" class="group_btn"/></td>
+       </tr>
+      </table>
+    </form>
 
 
-  <form id=login onsubmit='sub($(this))' action='javascript:;'>
-    <input type="hidden" name='add' id='ad'>
-     <tr>
-      <td width="100" align="right">收件人：</td>
-      <td><input type="text" name="name" placeholder="输入收件人姓名" class="textbox"/ required></td>
-     </tr>
-     <tr>
-      <td width="100" align="right">联系电话：</td>
-      <td><input type="text" name="phone" placeholder="收件人手机号码" class="textbox"/ required></td>
-     </tr>
-     <tr>
-      <td width="100" align="right">收件地址：</td>
-      <td>
-       <select class="select" name="aa" value="">
-        <option>选择省份</option>
-       </select>
-      </td>
-     </tr>
-     <tr>
-      <td width="100" align="right">详细地址：</td>
-      <td><input type="text" name="address" placeholder="街道门牌号" class="textbox textbox_295"/ required></td>
-     </tr>
-     <tr>
-      <td width="100" align="right"></td>
-      <td><input type="submit" value="更新保存" class="group_btn"/></td>
-     </tr>
-  </form>
-
-
-  </table>
-
-
-  <table class="order_table address_tbl">
-
-   <tr>
-    <th width="140">收件人</th>
-    <th width="140">联系电话</th>
-    <th>收件地址</th>
-    <th width="240">操作</th>
-   </tr>
-   <?php foreach($arr as $val): ?>
-   <tr>
-    <td style="padding-left:50px;"><?php echo $val['name']; ?></td>
-    <td style="padding-left:35px;"><?php echo $val['phone']; ?></td>
-    <td style="padding-left:150px;">
-     <address>
-      <?php echo $val['address']; ?>
-     </address>
-    </td>
-    <td style="padding-left:50px;">
-     <!-- <label><input type="radio" name="moren"/>设为默认地址</label> -->
-     <a href="<?php echo url('index/address/edit'); ?>?id=<?php echo $val['id']; ?>"><input type="button" value="编辑" class="btn"/></a>
-     <a href="" onclick="bu($(this),<?php echo $val['id']; ?>)"><input type="button" value="删除" class="btn"/></a>
-     <!-- <?php echo url('index/address/del'); ?>?id=<?php echo $val['id']; ?> -->
-    </td>
-   </tr>
-  <?php endforeach; ?>
-  <script>
-    function bu($this,$id){
-      var r=confirm('是否删除')
-      if (r==true){
-        // location.href='address/del?'+$id
-        $.get("<?php echo url('address/del'); ?>",{id:$id},function(data){
-          if (data==false) {
-            alert('删除失败');
-          }else{
-            $this.parents('tr').remove();
-          }
-
-          // alert(data);
-        })
-      }else{
-
-      }
-    }
-  </script>
-  </table>
  </div>
 </section>
 <!--footer-->

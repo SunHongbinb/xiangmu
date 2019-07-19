@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\index\index.html";i:1563336152;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\index\index.html";i:1563440299;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +8,7 @@
   <meta name="description" content="DeathGhost" />
   <meta name="author" content="DeathGhost,deathghost@deathghost.cn">
   <link rel="icon" href="/static/index/images/icon/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
-  <script src="/static/index/js/html5.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/index/css/style.css" /><script src="/static/index/js/html5.js"></script>
   <script src="/static/index/js/jquery.js"></script>
   <script src="/static/index/js/swiper.min.js"></script>
   <script>
@@ -39,7 +38,7 @@
          <a href="<?php echo url('login/index'); ?>" class=\"obviousText\">请登录</a>
      </li>
      <li>
-        <a href="<?php echo url('index/login/register'); ?>" class='obviousText'>注册</a>
+        <a href="<?php echo url('register/index'); ?>" class='obviousText'>注册</a>
      </li>
     </ul>
     <ul class="topRtNav">
@@ -57,7 +56,7 @@
     </ul>
     <ul class="topRtNav">
      <li><a href="<?php echo url('index/grzx/index'); ?>">个人中心</a></li>
-     <li><a href="<?php echo url('index/shopcar/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
+     <li><a href="<?php echo url('index/shopcar/index'); ?>" class="cartIcon">购物车<i><?php echo $shopnum; ?></i></a></li>
     </ul>
     <?php endif; ?>
    </div>
@@ -90,41 +89,41 @@
   <!--nav-->
   <nav>
 <ul class="wrap navList">
-  <li class="category">
-  <a>全部产品分类</a>
-    <dl class="asideNav indexAsideNav">
+<li class="category">
+<a>全部产品分类</a>
+<dl class="asideNav indexAsideNav">
 
 
-    <?php foreach($arr as $value): ?>
-      <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
-      <dd>
-        <?php foreach($value['zi'] as $val): ?>
-          <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
-        <?php endforeach; ?>
-      </dd>
+<?php foreach($arr as $value): ?>
+  <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
+  <dd>
+    <?php foreach($value['zi'] as $val): ?>
+      <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
     <?php endforeach; ?>
+  </dd>
+<?php endforeach; ?>
 
 
-    </dl>
-  </li>
-  <li>
-    <a href="#" class="active">首页</a>
-  </li>
-  <li>
-    <a href="#">时尚搭配</a>
-  </li>
-  <li>
-    <a href="#">原创设计</a>
-  </li>
-  <li>
-    <a href="#">时尚代购</a>
-  </li>
-  <li>
-    <a href="#">促销专区</a>
-  </li>
-  <li>
-    <a href="#">其他</a>
-  </li>
+</dl>
+</li>
+<li>
+<a href="<?php echo url('index/index'); ?>" class="active">首页</a>
+</li>
+<li>
+<a href="#">时尚搭配</a>
+</li>
+<li>
+<a href="#">原创设计</a>
+</li>
+<li>
+<a href="#">时尚代购</a>
+</li>
+<li>
+<a href="#">促销专区</a>
+</li>
+<li>
+<a href="#">其他</a>
+</li>
 </ul>
 </nav>
 
@@ -342,45 +341,62 @@
      <ul class="wrap help">
       <li>
        <dl>
-        <dt>消费者保障</dt>
-        <dd><a href="<?php echo url('index/index/read'); ?>">保障范围</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">退换货流程</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">服务中心</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">更多服务特色</a></dd>
-       </dl>
-      </li>
-      <li>
-       <dl>
-        <dt>新手上路</dt>
-        <dd><a href="<?php echo url('index/index/read'); ?>">保障范围</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">退换货流程</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">服务中心</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">更多服务特色</a></dd>
-       </dl>
-      </li>
-      <li>
-       <dl>
-        <dt>付款方式</dt>
-        <dd><a href="<?php echo url('index/index/read'); ?>">保障范围</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">退换货流程</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">服务中心</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">更多服务特色</a></dd>
-       </dl>
-      </li>
-      <li>
-       <dl>
-        <dt>服务保障</dt>
-        <dd><a href="<?php echo url('index/index/read'); ?>">保障范围</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">退换货流程</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">服务中心</a></dd>
-        <dd><a href="<?php echo url('index/index/read'); ?>">更多服务特色</a></dd>
-       </dl>
-      </li>
-     </ul>
-     <div class="wrap btmInfor">
-      <p>© 2013 DeathGhost.cn 版权所有 网络文化经营许可证：浙网文[2013]***-027号 增值电信业务经营许可证：浙B2-200***24-1 信息网络传播视听节目许可证：1109***4号</p>
-      <address>联系地址：陕西省西安市雁塔区XXX号</address>
-     </div>
-    </footer>
+    <dt>消费者保障</dt>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>新手上路</dt>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>付款方式</dt>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>服务保障</dt>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
+   </dl>
+  </li>
+ </ul>
+ <dl class="wrap otherLink">
+  <dt>友情链接</dt>
+  <dd><a href="#" target="_blank">17素材</a></dd>
+  <dd><a href="#">HTML5模块化后台管理模板</a></dd>
+  <dd><a href="#">绿色清爽后台管理系统模板</a></dd>
+  <dd><a href="#">黑色的cms商城网站后台管理模板</a></dd>
+  <dd><a href="#" target="_blank">前端博客</a></dd>
+  <dd><a href="#" target="_blank">博客</a></dd>
+  <dd><a href="#" target="_blank">新码笔记</a></dd>
+  <dd><a href="#" target="_blank">DethGhost</a></dd>
+  <dd><a href="#">当当</a></dd>
+  <dd><a href="#">优酷</a></dd>
+  <dd><a href="#">土豆</a></dd>
+  <dd><a href="#">新浪</a></dd>
+  <dd><a href="#">钉钉</a></dd>
+  <dd><a href="#">支付宝</a></dd>
+ </dl>
+ <div class="wrap btmInfor">
+  <p>© 2013 DeathGhost.cn 版权所有 网络文化经营许可证：浙网文[2013]***-027号 增值电信业务经营许可证：浙B2-200***24-1 信息网络传播视听节目许可证：1109***4号</p>
+  <address>联系地址：陕西省西安市雁塔区XXX号</address>
+ </div>
+</footer>
 </body>
 </html>

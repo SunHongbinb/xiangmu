@@ -29,7 +29,7 @@ class Detail extends Controller
         $comm=count($res);
         // dump($a);
         // dump($uname);
-        $arr=db('type')->where('pid',0)->select();
+        $arr=db('type')->where('pid',0)->where('state','1')->select();
           foreach($arr as $k => $v){
             $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
           }

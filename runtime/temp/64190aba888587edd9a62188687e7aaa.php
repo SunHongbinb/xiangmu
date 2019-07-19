@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1562843308;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\orders\index.html";i:1563437842;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -57,7 +57,6 @@
             <th>订单编号</th>
             <th>收货人</th>
             <th>总金额</th>
-            <th>应付金额</th>
             <th>订单状态</th>
             <th>商品</th>
             <th>下单时间</th>
@@ -70,7 +69,8 @@
           <tr>
             <td><?php echo $v['id']; ?></td>
             <td><?php echo $v['lxren']; ?></td>
-            <td><?php echo $v['total']; ?></td>
+            <?php 
+             ?>
             <td><?php echo $v['total']; ?></td>
             <td><?php echo $state[$v['state']]; ?></td>
             <td><?php echo $v['gid']; ?></td>
@@ -87,7 +87,7 @@
                 <?php endif; ?>
             </td>
             <td class="td-manage">
-              <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+              <a title="查看"  onclick="x_admin_show('查看','<?php echo url('admin/orders/read'); ?>?id={<?php echo $v['id']; ?>}')" href="javascript:;">
                 <i class="layui-icon">&#xe63c;</i>
               </a>
               <a title="删除" onclick="member_del(this,'<?php echo $v['id']; ?>')" href="javascript:;">

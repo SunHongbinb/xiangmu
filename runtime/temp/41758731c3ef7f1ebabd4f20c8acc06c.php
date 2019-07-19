@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\register\index.html";i:1563263429;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\register\index.html";i:1563356764;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,35 +7,8 @@
 <meta name="keywords"  content="DeathGhost" />
 <meta name="description" content="DeathGhost" />
 <meta name="author" content="DeathGhost,deathghost@deathghost.cn">
-<link rel="icon" href="/static/index//static/index/images/icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" />
-<style type="text/css">  
-.nocode {  
-  display: inline-block;
-    width: 100px;  
-    height: 25px;  
-}  
-  
-.code {  
-  display: inline-block;
-    color: #ff0000;  
-    font-family: Tahoma, Geneva, sans-serif;  
-    font-style: italic;  
-    font-weight: bold;  
-    text-align: center;  
-    width: 100px;  
-    height: 30px;  
-    line-height: 25px;
-    cursor: pointer;  
-    border:1px solid #e2b4a2;
-    background: #e2b4a2;
-}  
-  
-.input {  
-    width: 150px;  
-}  
-</style> 
-<script src="/static/index/js/html5.js"></script>
+<link rel="icon" href="/static/index/images/icon/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" /><script src="/static/index/js/html5.js"></script>
 <script src="/static/index/js/jquery.js"></script>
 <script>
 $(document).ready(function(){
@@ -56,20 +29,34 @@ $(document).ready(function(){
   <div class="topNavBg">
    <div class="wrap">
    <!--topLeftNav-->
+       <!-- 判断是否已登录 -->
+   <?php if(\think\Session::get('user.name')==null): ?>
     <ul class="topLtNav">
-     <li><a href="login.html" class="obviousText">亲，请登录</a></li>
-     <li><a href="register.html">注册</a></li>
-     <li><a href="#">移动端</a></li>
+     <li>
+         <a href="<?php echo url('login/index'); ?>" class=\"obviousText\">请登录</a>
+     </li>
+     <li>
+        <a href="<?php echo url('register/index'); ?>" class='obviousText'>注册</a>
+     </li>
     </ul>
-   <!--topRightNav-->
     <ul class="topRtNav">
-     <li><a href="user.html">个人中心</a></li>
-     <li><a href="cart.html" class="cartIcon">购物车<i>0</i></a></li>
-     <li><a href="favorite.html" class="favorIcon">收藏夹</a></li>
-     <li><a href="user.html">商家中心</a></li>
-     <li><a href="article_read.html" class="srvIcon">客户服务</a></li>
-     <li><a href="union_login.html">联盟管理</a></li>
+     <li><a href="<?php echo url('index/login/index'); ?>">个人中心</a></li>
+     <li><a href="<?php echo url('index/login/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
     </ul>
+    <?php else: ?>
+    <ul class="topLtNav">
+     <li>
+         <a href="<?php echo url('index/grzx/index'); ?>" class=\"obviousText\">欢迎您 :<?php echo \think\Session::get('user.name'); ?></a>
+     </li>
+     <li>
+         <a href="<?php echo url('index/login/loginout'); ?>?id=<?php echo \think\Session::get('user.id'); ?>" class='obviousText'>退出</a>
+     </li>
+    </ul>
+    <ul class="topRtNav">
+     <li><a href="<?php echo url('index/grzx/index'); ?>">个人中心</a></li>
+     <li><a href="<?php echo url('index/shopcar/index'); ?>" class="cartIcon">购物车<i><?php echo $shopnum; ?></i></a></li>
+    </ul>
+    <?php endif; ?>
    </div>
   </div>
   <!--logoArea-->
@@ -86,17 +73,25 @@ $(document).ready(function(){
      <li id="zixun">搭配</li>
      <li id="wenku">文库</li>
     </ul>
-    <div class="searchBox">
-     <form>
-      <div class="inputWrap">
-      <input type="text" placeholder="输入产品关键词或货号"/>
+
+
+
+      <!-- 搜索 -->
+      <div class="searchBox">
+       <form action="<?php echo url('index/lists/index'); ?>" method="get">
+        <div class="inputWrap">
+        <input type="text" name="name" value="" placeholder="输入产品关键词"/>
+        </div>
+        <div class="btnWrap">
+        <input type="submit" value="搜索"/>
+        </div>
+       </form>
       </div>
-      <div class="btnWrap">
-      <input type="submit" value="搜索"/>
-      </div>
-     </form>
-     <a href="#" class="advancedSearch">高级搜索</a>
-    </div>
+
+
+
+
+
    </div>
   </div>
   <!--nav-->
@@ -104,41 +99,41 @@ $(document).ready(function(){
 <ul class="wrap navList">
 <li class="category">
 <a>全部产品分类</a>
+
+
+
 <dl class="asideNav indexAsideNav">
-
-
-    <?php foreach($arr as $value): ?>
-      <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
-      <dd>
-        <?php foreach($value['zi'] as $val): ?>
-          <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
-        <?php endforeach; ?>
-      </dd>
-    <?php endforeach; ?>
-
-
-    </dl>
+  <!-- 分类遍历 -->
+  <?php foreach($arr as $value): ?>
+    <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
+    <dd>
+      <?php foreach($value['zi'] as $val): ?>
+        <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
+      <?php endforeach; ?>
+    </dd>
+  <?php endforeach; ?>
+</dl>
 </li>
 <li>
-<a href="index.html" class="active">首页</a>
+<a href="<?php echo url('index/index'); ?>" class="active">首页</a>
 </li>
 <li>
 <a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="channel.html">原创设计</a>
+<a href="#">原创设计</a>
 </li>
 <li>
-<a href="channel.html">时尚代购</a>
+<a href="#">时尚代购</a>
 </li>
 <li>
-<a href="channel.html">民族风</a>
+<a href="#">民族风</a>
 </li>
 <li>
-<a href="information.html">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="library.html">搭配知识</a>
+<a href="#">搭配知识</a>
 </li>
 <li>
 <a href="#">促销专区</a>
@@ -180,54 +175,95 @@ $(document).ready(function(){
   <h2>会员注册</h2>
   <form action='javascript:;' onsubmit='sub($(this))'>
       <ul>
+
        <li class="user_icon">
-        <input type="text" name="username" class="textbox" placeholder="输入账号"/ >
+        <input type="text" name="phone" class="textbox" placeholder="输入手机号" required/ >
        </li>
+
+       <li class="link_li">
+        <input type="button" id="al" value="获取手机校验码" class="get_num_btn"/>
+       </li>
+
+       <li class="user_cc">
+        <input type="text" name="code" class="textbox" placeholder="手机校验码" required/>
+       </li>
+
        <li class="user_icon">
-        <input type="text" name="name" class="textbox" placeholder="真实姓名"/ >
+        <input type="text" name="name" class="textbox" placeholder="真实姓名" required/ >
        </li>
+
        <li class="user_pwd">
-        <input type="password" name="pass" class="textbox" placeholder="设置密码"/ >
+        <input type="password" name="pass" class="textbox" placeholder="设置密码" required/ >
        </li>
+
        <li class="user_pwd">
-        <input type="password" name="pass1" class="textbox" placeholder="确认密码"/ >
+        <input type="password" name="pass1" class="textbox" placeholder="确认密码" required/ >
        </li>
+
        <li class="link_li">
         <a href="<?php echo url('login/index'); ?>" title="登录账号" class="fr">已有账号，立即登录？</a>
        </li>
+
        <li class="link_li">
-        <input type="submit" id="check" value="立即注册" class="sbmt_btn"/>
+        <input type="submit" value="立即注册" class="sbmt_btn"/>
        </li>
+
       </ul>
   </form>
 
-       <script>
-            function sub($this){
-               data=$this.serialize();
-              $.ajax({
-                type:'post'
-                ,url:"<?php echo url('index/register/add'); ?>"
-                ,async:true
-                ,data:data
-                ,dataType:"json"
-                ,success:function(data){
-                  if (data['code']==0) {
-                      // location.href="<?php echo url('index/index'); ?>";
-                    alert('该账号已被注册')
-                  }else if(data['code']==1){
-                    alert('两次密码不一致')
-                  }else if(data['code']==2){
-                    alert('注册成功')
-                      location.href="<?php echo url('login/index'); ?>";
-                  }
-                }
-                ,error:function(data){
-                      // location.href='index.html'
-                      alert("连接失败")
-                }
-              })
-            };
-       </script>
+    <script>
+        function sub($this){
+           // console.log($this.serialize());
+           data=$this.serialize();
+          $.ajax({
+            type:'post'
+            ,url:"<?php echo url('index/register/add'); ?>"
+            ,async:true
+            ,data:data
+            ,dataType:"json"
+            ,success:function(data){
+              if (data['code']==0) {
+                  // location.href="<?php echo url('index/index'); ?>";
+                  alert('该账号已被注册')
+              }else if(data['code']==1){
+                alert('两次密码不一致')
+              }else if(data['code']==2){
+                alert('注册成功')
+                  location.href="<?php echo url('login/index'); ?>";
+              }else if(data['code']==3){
+                alert('验证码错误')
+              }
+            }
+            ,error:function(data){
+              console.log(data)
+                  // location.href='index.html'
+                  alert("连接失败")
+            }
+          })
+        };
+
+    </script>
+    <script>
+      $("#al").click(function(event){
+        // alert('111')
+        var btn=$(this)
+        var phone=$("input[name=phone]").val();
+        $.post("<?php echo url('index/register/sendSms'); ?>", {phone: phone}, function(data) {
+          /*optional stuff to do after success */
+          if(data==1){
+            btn.attr('disabled',true)
+            btn.html("短信发送成功")
+          }else{
+            btn.html(data);
+          }
+        },'text');
+        return false;
+      });
+
+    </script>
+
+
+
  </div>
 </section>
 <!--footer-->
@@ -237,50 +273,50 @@ $(document).ready(function(){
   <li>
    <dl>
     <dt>消费者保障</dt>
-    <dd><a href="article_read.html">保障范围</a></dd>
-    <dd><a href="article_read.html">退换货流程</a></dd>
-    <dd><a href="article_read.html">服务中心</a></dd>
-    <dd><a href="article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
   <li>
    <dl>
     <dt>新手上路</dt>
-    <dd><a href="article_read.html">保障范围</a></dd>
-    <dd><a href="article_read.html">退换货流程</a></dd>
-    <dd><a href="article_read.html">服务中心</a></dd>
-    <dd><a href="article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
   <li>
    <dl>
     <dt>付款方式</dt>
-    <dd><a href="article_read.html">保障范围</a></dd>
-    <dd><a href="article_read.html">退换货流程</a></dd>
-    <dd><a href="article_read.html">服务中心</a></dd>
-    <dd><a href="article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
   <li>
    <dl>
     <dt>服务保障</dt>
-    <dd><a href="article_read.html">保障范围</a></dd>
-    <dd><a href="article_read.html">退换货流程</a></dd>
-    <dd><a href="article_read.html">服务中心</a></dd>
-    <dd><a href="article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
  </ul>
  <dl class="wrap otherLink">
   <dt>友情链接</dt>
-  <dd><a href="http://www.17sucai.com" target="_blank">17素材</a></dd>
-  <dd><a href="http://www.17sucai.com/pins/24448.html">HTML5模块化后台管理模板</a></dd>
-  <dd><a href="http://www.17sucai.com/pins/15966.html">绿色清爽后台管理系统模板</a></dd>
-  <dd><a href="http://www.17sucai.com/pins/14931.html">黑色的cms商城网站后台管理模板</a></dd>
-  <dd><a href="http://www.deathghost.cn" target="_blank">前端博客</a></dd>
-  <dd><a href="http://www.deathghost.cn" target="_blank">博客</a></dd>
-  <dd><a href="http://www.deathghost.cn" target="_blank">新码笔记</a></dd>
-  <dd><a href="http://www.deathghost.cn" target="_blank">DethGhost</a></dd>
+  <dd><a href="#" target="_blank">17素材</a></dd>
+  <dd><a href="#">HTML5模块化后台管理模板</a></dd>
+  <dd><a href="#">绿色清爽后台管理系统模板</a></dd>
+  <dd><a href="#">黑色的cms商城网站后台管理模板</a></dd>
+  <dd><a href="#" target="_blank">前端博客</a></dd>
+  <dd><a href="#" target="_blank">博客</a></dd>
+  <dd><a href="#" target="_blank">新码笔记</a></dd>
+  <dd><a href="#" target="_blank">DethGhost</a></dd>
   <dd><a href="#">当当</a></dd>
   <dd><a href="#">优酷</a></dd>
   <dd><a href="#">土豆</a></dd>
@@ -294,5 +330,4 @@ $(document).ready(function(){
  </div>
 </footer>
 </body>
-<script src="/static/admin/js/jquery-1.12.3.min.js"></script>
 </html>

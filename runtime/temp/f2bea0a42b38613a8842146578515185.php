@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:90:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\order\order_confirm.html";i:1562828700;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:90:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\order\order_confirm.html";i:1563355953;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +52,7 @@ $(document).ready(function(){
    <!--topRightNav-->
     <ul class="topRtNav">
      <li><a href="<?php echo url('grzx/index'); ?>">个人中心</a></li>
-     <li><a href="<?php echo url('shopcar/index'); ?>" class="cartIcon">购物车<i>0</i></a></li>
+     <li><a href="<?php echo url('shopcar/index'); ?>" class="cartIcon">购物车<i><?php echo $shopnum; ?></i></a></li>
     </ul>
     <?php endif; ?>
    </div>
@@ -71,17 +71,21 @@ $(document).ready(function(){
      <li id="zixun">搭配</li>
      <li id="wenku">文库</li>
     </ul>
+
+
     <div class="searchBox">
-     <form>
+     <form action="<?php echo url('index/lists/index'); ?>" method="get">
       <div class="inputWrap">
-      <input type="text" placeholder="输入产品关键词或货号"/>
+      <input type="text" name="name" value="" placeholder="输入产品关键词"/>
       </div>
       <div class="btnWrap">
       <input type="submit" value="搜索"/>
       </div>
      </form>
-     <a href="/static/index/#" class="advancedSearch">高级搜索</a>
     </div>
+
+
+
    </div>
   </div>
   <!--nav-->
@@ -90,74 +94,47 @@ $(document).ready(function(){
 <li class="category">
 <a>全部产品分类</a>
 <dl class="asideNav indexAsideNav">
-<dt><a href="/static/index/channel.html">女装</a></dt>
-<dd>
-<a href="/static/index/#">夏装新</a>
-<a href="/static/index/#">连衣裙</a>
-<a href="/static/index/#">T恤</a>
-<a href="/static/index/#">衬衫</a>
-<a href="/static/index/#">裤子</a>
-<a href="/static/index/#">牛仔裤</a>
-<a href="/static/index/#">背带裤</a>
-<a href="/static/index/#">短外套</a>
-<a href="/static/index/#">时尚外套</a>
-<a href="/static/index/#">风衣</a>
-<a href="/static/index/#">毛衣</a>
-<a href="/static/index/#">背心</a>
-<a href="/static/index/#">吊带</a>
-<a href="/static/index/#">民族服装</a>
-</dd>
-<dt><a href="/static/index/channel.html">男装</a></dt>
-<dd>
-<a href="/static/index/#">衬衫</a>
-<a href="/static/index/#">背心</a>
-<a href="/static/index/#">西装</a>
-<a href="/static/index/#">POLO衫</a>
-<a href="/static/index/#">马夹</a>
-<a href="/static/index/#">皮衣</a>
-<a href="/static/index/#">毛衣</a>
-<a href="/static/index/#">针织衫</a>
-<a href="/static/index/#">牛仔裤</a>
-<a href="/static/index/#">外套</a>
-<a href="/static/index/#">夹克</a>
-<a href="/static/index/#">卫衣</a>
-<a href="/static/index/#">风衣</a>
-<a href="/static/index/#">民族风</a>
-<a href="/static/index/#">原创设计</a>
-<a href="/static/index/#">大码</a>
-<a href="/static/index/#">情侣装</a>
-<a href="/static/index/#">开衫</a>
-<a href="/static/index/#">运动裤</a>
-<a href="/static/index/#">工装裤</a>
-</dd>
+
+
+<?php foreach($ss as $value): ?>
+  <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
+  <dd>
+    <?php foreach($value['zi'] as $val): ?>
+      <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
+    <?php endforeach; ?>
+  </dd>
+<?php endforeach; ?>
+
+
+
 </dl>
 </li>
 <li>
-<a href="/static/index/index.html" class="active">首页</a>
+<a href="<?php echo url('index/index'); ?>" class="active">首页</a>
 </li>
 <li>
-<a href="/static/index/#">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="/static/index/channel.html">原创设计</a>
+<a href="#">原创设计</a>
 </li>
 <li>
-<a href="/static/index/channel.html">时尚代购</a>
+<a href="#">时尚代购</a>
 </li>
 <li>
-<a href="/static/index/channel.html">民族风</a>
+<a href="#">民族风</a>
 </li>
 <li>
-<a href="/static/index/information.html">时尚搭配</a>
+<a href="#">时尚搭配</a>
 </li>
 <li>
-<a href="/static/index/library.html">搭配知识</a>
+<a href="#">搭配知识</a>
 </li>
 <li>
-<a href="/static/index/#">促销专区</a>
+<a href="#">促销专区</a>
 </li>
 <li>
-<a href="/static/index/#">其他</a>
+<a href="#">其他</a>
 </li>
 </ul>
 </nav>
@@ -196,7 +173,7 @@ $(document).ready(function(){
 <?php foreach($arr as $v): ?>
 
   <tr>
-   <td class="center"><a href="/static/index/product.html"><img src="/static/index/upload/goods.jpg" style="width:50px;height:50px;"/></a></td>
+   <td class="center"><a href="/static/index/product.html"><img src="/static/uploads/goods/<?php echo $v['picname']; ?>" style="width:50px;height:50px;"/></a></td>
    <td><a href="/static/index/product.html"><?php echo $v['name']; ?></a></td>
    <td>
     <p>颜色：<?php echo $v['color']; ?></p>
@@ -289,56 +266,56 @@ $(document).ready(function(){
   <li>
    <dl>
     <dt>消费者保障</dt>
-    <dd><a href="/static/index/article_read.html">保障范围</a></dd>
-    <dd><a href="/static/index/article_read.html">退换货流程</a></dd>
-    <dd><a href="/static/index/article_read.html">服务中心</a></dd>
-    <dd><a href="/static/index/article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
   <li>
    <dl>
     <dt>新手上路</dt>
-    <dd><a href="/static/index/article_read.html">保障范围</a></dd>
-    <dd><a href="/static/index/article_read.html">退换货流程</a></dd>
-    <dd><a href="/static/index/article_read.html">服务中心</a></dd>
-    <dd><a href="/static/index/article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
   <li>
    <dl>
     <dt>付款方式</dt>
-    <dd><a href="/static/index/article_read.html">保障范围</a></dd>
-    <dd><a href="/static/index/article_read.html">退换货流程</a></dd>
-    <dd><a href="/static/index/article_read.html">服务中心</a></dd>
-    <dd><a href="/static/index/article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
   <li>
    <dl>
     <dt>服务保障</dt>
-    <dd><a href="/static/index/article_read.html">保障范围</a></dd>
-    <dd><a href="/static/index/article_read.html">退换货流程</a></dd>
-    <dd><a href="/static/index/article_read.html">服务中心</a></dd>
-    <dd><a href="/static/index/article_read.html">更多服务特色</a></dd>
+    <dd><a href="#">保障范围</a></dd>
+    <dd><a href="#">退换货流程</a></dd>
+    <dd><a href="#">服务中心</a></dd>
+    <dd><a href="#">更多服务特色</a></dd>
    </dl>
   </li>
  </ul>
  <dl class="wrap otherLink">
   <dt>友情链接</dt>
-  <dd><a href="/static/index/http://www.17sucai.com" target="_blank">17素材</a></dd>
-  <dd><a href="/static/index/http://www.17sucai.com/pins/24448.html">HTML5模块化后台管理模板</a></dd>
-  <dd><a href="/static/index/http://www.17sucai.com/pins/15966.html">绿色清爽后台管理系统模板</a></dd>
-  <dd><a href="/static/index/http://www.17sucai.com/pins/14931.html">黑色的cms商城网站后台管理模板</a></dd>
-  <dd><a href="/static/index/http://www.deathghost.cn" target="_blank">前端博客</a></dd>
-  <dd><a href="/static/index/http://www.deathghost.cn" target="_blank">博客</a></dd>
-  <dd><a href="/static/index/http://www.deathghost.cn" target="_blank">新码笔记</a></dd>
-  <dd><a href="/static/index/http://www.deathghost.cn" target="_blank">DethGhost</a></dd>
-  <dd><a href="/static/index/#">当当</a></dd>
-  <dd><a href="/static/index/#">优酷</a></dd>
-  <dd><a href="/static/index/#">土豆</a></dd>
-  <dd><a href="/static/index/#">新浪</a></dd>
-  <dd><a href="/static/index/#">钉钉</a></dd>
-  <dd><a href="/static/index/#">支付宝</a></dd>
+  <dd><a href="#" target="_blank">17素材</a></dd>
+  <dd><a href="#">HTML5模块化后台管理模板</a></dd>
+  <dd><a href="#">绿色清爽后台管理系统模板</a></dd>
+  <dd><a href="#">黑色的cms商城网站后台管理模板</a></dd>
+  <dd><a href="#" target="_blank">前端博客</a></dd>
+  <dd><a href="#" target="_blank">博客</a></dd>
+  <dd><a href="#" target="_blank">新码笔记</a></dd>
+  <dd><a href="#" target="_blank">DethGhost</a></dd>
+  <dd><a href="#">当当</a></dd>
+  <dd><a href="#">优酷</a></dd>
+  <dd><a href="#">土豆</a></dd>
+  <dd><a href="#">新浪</a></dd>
+  <dd><a href="#">钉钉</a></dd>
+  <dd><a href="#">支付宝</a></dd>
  </dl>
  <div class="wrap btmInfor">
   <p>© 2013 DeathGhost.cn 版权所有 网络文化经营许可证：浙网文[2013]***-027号 增值电信业务经营许可证：浙B2-200***24-1 信息网络传播视听节目许可证：1109***4号</p>

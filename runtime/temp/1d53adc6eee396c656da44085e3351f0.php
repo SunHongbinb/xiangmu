@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\comment\index.html";i:1563331160;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\comment\index.html";i:1563437447;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +46,7 @@
                             评分
                         </th>
                         <th>
-                            评论
+                            评论内容
                         </th>
                         <th>
                             回复人
@@ -82,7 +82,7 @@
                             <?php echo $v['content']; ?>
                         </td>
                         <td>
-                            
+                            <?php echo !empty($admin[$v['aid']])?$admin[$v['aid']]:'';; ?>
                         </td>
                         <td id="reply" >
                             <?php echo !empty($v['reply'])?$v['reply']:'';; ?>

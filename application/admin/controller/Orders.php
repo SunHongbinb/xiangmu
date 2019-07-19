@@ -35,4 +35,26 @@ class Orders extends Base
         return $res;
         
     }
+    public function read($id)
+    {
+        $arr=db('orders')->find($id);
+        $arr['gid']=explode(',',$arr['gid']);
+        $arr['sname']=explode(',',$arr['sname']);
+        $arr['picname']=explode(',',$arr['picname']);
+        $arr['price']=explode(',',$arr['price']);
+        $arr['num']=explode(',',$arr['num']);
+        $arr['size']=explode(',',$arr['size']);
+        $arr['color']=explode(',',$arr['color']);
+        for($i=0;$i<count($arr['gid']);$i++){
+            $goods[$i]=['gid'=>$arr['gid'][$i],'sname'=>$arr['sname'][$i],'picname'=>$arr['picname'][$i],'price'=>$arr['price'][$i],'num'=>$arr['num'][$i],'size'=>$arr['size'][$i],'color'=>$arr['color'][$i]];
+        }
+        $state=array('0'=>'待确认','1'=>'已确认','2'=>'已发货','3'=>'已收货','4'=>'已评论','5'=>'已取消');
+        $total=explode(',',$arr['total']);
+        $arr['total']=0;
+        foreach ($total as $v) {
+            $arr['total']+=$v;
+        }
+        return view('',['arr'=>$arr,'state'=>$state,'goods'=>$goods]);
+        
+    }
 }

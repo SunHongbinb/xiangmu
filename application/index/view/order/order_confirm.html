@@ -219,24 +219,28 @@ $(document).ready(function(){
         <input type="hidden" name="WIDsubject" value="{$arr[0]['name']}">
         <input type="hidden" name="WIDbody" value="好东西">
       </tr>
-      {foreach $addre as $v}
 
-       <tr>
-        <!-- 收货人 -->
-        <td style="padding-left:50px;">  <input type="" value="{$v.name}" style="border-width:0;">    </td>
-        <!-- 联系电话 -->
-        <td style="padding-left:35px;">  <input type="" value="{$v.phone}" style="border-width:0;">    </td>
-        <!-- 收货地址 -->
-        <td style="padding-left:280px;">
-         <address>
-          <input type="" value="{$v.address}" style="border-width:0;">
-         </address>
-        </td>
-        <td style="padding-left:114px;">
-         <input type="radio" checked name="address" value="{$v.id}">
-        </td>
-       </tr>
-      {/foreach}
+      {if $addre!=null}
+        {foreach $addre as $v}
+         <tr>
+          <!-- 收货人 -->
+          <td style="padding-left:50px;">  <input type="" value="{$v.name}" style="border-width:0;">    </td>
+          <!-- 联系电话 -->
+          <td style="padding-left:35px;">  <input type="" value="{$v.phone}" style="border-width:0;">    </td>
+          <!-- 收货地址 -->
+          <td style="padding-left:280px;">
+           <address>
+            <input type="" value="{$v.address}" style="border-width:0;">
+           </address>
+          </td>
+          <td style="padding-left:114px;">
+           <input type="radio" checked name="address" value="{$v.id}">
+          </td>
+         </tr>
+        {/foreach}
+      {else}
+        <script>alert('请先去添加一个地址');window.location="{:url('order/index')}"</script>
+      {/if}
     </form>
 
 

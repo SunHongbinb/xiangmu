@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\goods\index.html";i:1563250745;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\goods\index.html";i:1563422764;}*/ ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,7 +67,7 @@
                   <?php 
                    $arr=explode(",",$v['picname']);
                    $pl=count($arr);
-                   $__FOR_START_16008__=0;$__FOR_END_16008__=$pl-1;for($i=$__FOR_START_16008__;$i < $__FOR_END_16008__;$i+=1){ ?>
+                   $__FOR_START_12322__=0;$__FOR_END_12322__=$pl-1;for($i=$__FOR_START_12322__;$i < $__FOR_END_12322__;$i+=1){ ?>
                   <img src="/static/uploads/goods/<?php echo $arr[$i]; ?>" width="50px" alt="">
                   <?php } ?>
                 </td>
@@ -143,7 +143,7 @@
                           ,dataType:'text'
                           ,success:function(data){
                               $(obj).attr('title','下架')
-                              $(obj).find('i').html('&#xe62f;');
+                              $(obj).find('i').html('&#xe601;');
 
                               $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').addClass('layui-btn-normal').html('在售中');
                               layer.msg('已上架!',{icon: 6,time:1000});
@@ -161,7 +161,7 @@
                           ,dataType:'text'
                           ,success:function(data){
                               $(obj).attr('title','上架')
-                              $(obj).find('i').html('&#xe601;');
+                              $(obj).find('i').html('&#xe62f;');
 
                               $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已下架');
                               layer.msg('已下架!',{icon: 5,time:1000});

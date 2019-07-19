@@ -1,14 +1,15 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/index\view\register\find.html";i:1563355995;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>注册</title>
+<title>找回密码</title>
 <meta name="keywords"  content="DeathGhost" />
 <meta name="description" content="DeathGhost" />
 <meta name="author" content="DeathGhost,deathghost@deathghost.cn">
-<link rel="icon" href="__STATIC__/index/images/icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="__STATIC__/index/css/style.css" /><script src="__STATIC__/index/js/html5.js"></script>
-<script src="__STATIC__/index/js/jquery.js"></script>
+<link rel="icon" href="/static/index/images/icon/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="/static/index/css/style.css" /><script src="/static/index/js/html5.js"></script>
+<script src="/static/index/js/jquery.js"></script>
 <script>
 $(document).ready(function(){
   $("nav .indexAsideNav").hide();
@@ -29,40 +30,39 @@ $(document).ready(function(){
    <div class="wrap">
    <!--topLeftNav-->
        <!-- 判断是否已登录 -->
-   {if $Think.session.user.name==null}
+   <?php if(\think\Session::get('user.name')==null): ?>
     <ul class="topLtNav">
      <li>
-         <a href="{:url('login/index')}" class=\"obviousText\">请登录</a>
+         <a href="<?php echo url('login/index'); ?>" class=\"obviousText\">请登录</a>
      </li>
      <li>
-        <a href="{:url('register/index')}" class='obviousText'>注册</a>
+        <a href="<?php echo url('register/index'); ?>" class='obviousText'>注册</a>
      </li>
     </ul>
     <ul class="topRtNav">
-     <li><a href="{:url('index/login/index')}">个人中心</a></li>
-     <li><a href="{:url('index/login/index')}" class="cartIcon">购物车<i>0</i></a></li>
+     <li><a href="<?php echo url('index/login/index'); ?>">个人中心</a></li>
     </ul>
-    {else}
+    <?php else: ?>
     <ul class="topLtNav">
      <li>
-         <a href="{:url('index/grzx/index')}" class=\"obviousText\">欢迎您 :{$Think.session.user.name}</a>
+         <a href="<?php echo url('index/grzx/index'); ?>" class=\"obviousText\">欢迎您 :<?php echo \think\Session::get('user.name'); ?></a>
      </li>
      <li>
-         <a href="{:url('index/login/loginout')}?id={$Think.session.user.id}" class='obviousText'>退出</a>
+         <a href="<?php echo url('index/login/loginout'); ?>?id=<?php echo \think\Session::get('user.id'); ?>" class='obviousText'>退出</a>
      </li>
     </ul>
     <ul class="topRtNav">
-     <li><a href="{:url('index/grzx/index')}">个人中心</a></li>
-     <li><a href="{:url('index/shopcar/index')}" class="cartIcon">购物车<i>{$shopnum}</i></a></li>
+     <li><a href="<?php echo url('index/grzx/index'); ?>">个人中心</a></li>
+     <li><a href="<?php echo url('index/shopcar/index'); ?>" class="cartIcon">购物车<i><?php echo $shopnum; ?></i></a></li>
     </ul>
-    {/if}
+    <?php endif; ?>
    </div>
   </div>
   <!--logoArea-->
   <div class="wrap logoSearch">
    <!--logo-->
    <div class="logo">
-    <h1><a href="index"><img src="__STATIC__/index/images/logo.png"/></a></h1>
+    <h1><img src="/static/index/images/logo.png"/></h1>
    </div>
    <!--search-->
    <div class="search">
@@ -75,9 +75,10 @@ $(document).ready(function(){
 
 
 
+
       <!-- 搜索 -->
       <div class="searchBox">
-       <form action="{:url('index/lists/index')}" method="get">
+       <form action="<?php echo url('index/lists/index'); ?>" method="get">
         <div class="inputWrap">
         <input type="text" name="name" value="" placeholder="输入产品关键词"/>
         </div>
@@ -90,7 +91,6 @@ $(document).ready(function(){
 
 
 
-
    </div>
   </div>
   <!--nav-->
@@ -98,23 +98,25 @@ $(document).ready(function(){
 <ul class="wrap navList">
 <li class="category">
 <a>全部产品分类</a>
-
-
-
 <dl class="asideNav indexAsideNav">
+
+
   <!-- 分类遍历 -->
-  {foreach $arr as $value}
-    <dt><a href="javascript:;">{$value.name}</a></dt>
+  <?php foreach($arr as $value): ?>
+    <dt><a href="javascript:;"><?php echo $value['name']; ?></a></dt>
     <dd>
-      {foreach $value.zi as $val}
-        <a href="{:url('index/lists/index')}?id={$val.id}">{$val.name}</a>
-      {/foreach}
+      <?php foreach($value['zi'] as $val): ?>
+        <a href="<?php echo url('index/lists/index'); ?>?id=<?php echo $val['id']; ?>"><?php echo $val['name']; ?></a>
+      <?php endforeach; ?>
     </dd>
-  {/foreach}
+  <?php endforeach; ?>
+
+
+
 </dl>
 </li>
 <li>
-<a href="{:url('index/index')}" class="active">首页</a>
+<a href="<?php echo url('index/index'); ?>" class="active">首页</a>
 </li>
 <li>
 <a href="#">时尚搭配</a>
@@ -168,101 +170,100 @@ $(document).ready(function(){
 
 <section class="wrap user_form">
  <div class="lt_img">
-  <img src="__STATIC__/index/images/form_bg.jpg"/>
+  <img src="/static/index/images/form_bg.jpg"/>
  </div>
  <div class="rt_form">
-  <h2>会员注册</h2>
+  <h2>找回密码</h2>
+  <ul>
+
   <form action='javascript:;' onsubmit='sub($(this))'>
-      <ul>
 
-       <li class="user_icon">
-        <input type="text" name="phone" class="textbox" placeholder="输入手机号" required/ >
-       </li>
+     <li class="user_icon">
+      <input type="text" name="phone" class="textbox" placeholder="手机号码" required/>
+     </li>
 
-       <li class="link_li">
-        <input type="button" id="al" value="获取手机校验码" class="get_num_btn"/>
-       </li>
+     <li class="link_li">
+      <input type="button" id="al" value="获取手机校验码" class="get_num_btn"/>
+     </li>
 
-       <li class="user_cc">
-        <input type="text" name="code" class="textbox" placeholder="手机校验码" required/>
-       </li>
+     <li class="user_cc">
+      <input type="text" name="code" class="textbox" placeholder="手机校验码" required/>
+     </li>
 
-       <li class="user_icon">
-        <input type="text" name="name" class="textbox" placeholder="真实姓名" required/ >
-       </li>
+     <li class="user_pwd">
+      <input type="password" name="pass" class="textbox" placeholder="设置新密码" required/>
+     </li>
 
-       <li class="user_pwd">
-        <input type="password" name="pass" class="textbox" placeholder="设置密码" required/ >
-       </li>
+     <li class="user_pwd">
+      <input type="password" name="pass1" class="textbox" placeholder="确认新密码" required/>
+     </li>
 
-       <li class="user_pwd">
-        <input type="password" name="pass1" class="textbox" placeholder="确认密码" required/ >
-       </li>
+     <li class="link_li">
+      <input type="submit" value="找回密码" class="sbmt_btn"/>
+     </li>
 
-       <li class="link_li">
-        <a href="{:url('login/index')}" title="登录账号" class="fr">已有账号，立即登录？</a>
-       </li>
-
-       <li class="link_li">
-        <input type="submit" value="立即注册" class="sbmt_btn"/>
-       </li>
-
-      </ul>
   </form>
 
-    <script>
-        function sub($this){
-           // console.log($this.serialize());
-           data=$this.serialize();
-          $.ajax({
-            type:'post'
-            ,url:"{:url('index/register/add')}"
-            ,async:true
-            ,data:data
-            ,dataType:"json"
-            ,success:function(data){
-              if (data['code']==0) {
-                  // location.href="{:url('index/index')}";
-                  alert('该账号已被注册')
-              }else if(data['code']==1){
-                alert('两次密码不一致')
-              }else if(data['code']==2){
-                alert('注册成功')
-                  location.href="{:url('login/index')}";
-              }else if(data['code']==3){
-                alert('验证码错误')
-              }
-            }
-            ,error:function(data){
-              console.log(data)
-                  // location.href='index.html'
-                  alert("连接失败")
-            }
-          })
-        };
 
-    </script>
-    <script>
-      $("#al").click(function(event){
-        // alert('111')
-        var btn=$(this)
-        var phone=$("input[name=phone]").val();
-        $.post("{:url('index/register/sendSms')}", {phone: phone}, function(data) {
-          /*optional stuff to do after success */
-          if(data==1){
-            btn.attr('disabled',true)
-            btn.html("短信发送成功")
-          }else{
-            btn.html(data);
+
+
+  <script>
+      function sub($this){
+         // console.log($this.serialize());
+         data=$this.serialize();
+        $.ajax({
+          type:'post'
+          ,url:"<?php echo url('index/register/find_pwd'); ?>"
+          ,async:true
+          ,data:data
+          ,dataType:"json"
+          ,success:function(data){
+            if (data['code']==0) {
+                // location.href="<?php echo url('index/index'); ?>";
+                alert('修改成功')
+                location.href="<?php echo url('login/index'); ?>";
+            }else if(data['code']==1){
+              alert('该手机号未注册')
+            }else if(data['code']==2){
+              alert('两次密码不一致')
+            }else if(data['code']==3){
+              alert('验证码错误')
+            }
           }
-        },'text');
-        return false;
-      });
+          ,error:function(data){
+            console.log(data)
+                // location.href='index.html'
+                alert("连接失败")
+          }
+        })
+      };
 
-    </script>
+  </script>
 
 
 
+
+  <script>
+    $("#al").click(function(event){
+      // alert('111')
+      var btn=$(this)
+      var phone=$("input[name=phone]").val();
+      $.post("<?php echo url('index/register/sendSms'); ?>", {phone: phone}, function(data) {
+        /*optional stuff to do after success */
+        if(data==1){
+          btn.attr('disabled',true)
+          btn.html("短信发送成功")
+        }else{
+          btn.html(data);
+        }
+      },'text');
+      return false;
+    });
+
+  </script>
+
+
+  </ul>
  </div>
 </section>
 <!--footer-->

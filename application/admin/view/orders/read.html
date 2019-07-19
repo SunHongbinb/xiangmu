@@ -1,0 +1,77 @@
+{extend name="base"}
+{block name="body"}
+    <div class="x-body">
+      <form class="layui-form">
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+                  <span class="x-red">*</span>订单号</label>
+              <div class="layui-input-inline">
+                <input type="text" readonly="" name="id" value="{$arr.id}" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>订单状态
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" name="state" value="{$state[$arr.state]}" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>收件人
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" readonly="" name="name" value="{$arr.lxren}" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>收件地址
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" readonly="" name="address" value="{$arr.address}" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label  class="layui-form-label">
+                  <span class="x-red">*</span>总价
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" readonly="" name="address" value="{$arr.total}" class="layui-input">
+              </div>
+          </div>
+          <table class="layui-table same" id="main">
+                <tr>
+                  <td>id</td>
+                  <td>商品名</td>
+                  <td>商品图片</td>
+                  <td>规格</td>
+                  <td>颜色</td>
+                  <td>数量</td>
+                  <td>单价</td>
+                </tr>
+          {foreach $goods as $k => $v}
+                <tr>
+                  <td>{$k}</td>
+                  <td>{$v.sname}</td>
+                  <td><img src="__STATIC__/uploads/goods/{$v.picname}" width="50px" height=""></td>
+                  <td>{$v.size}</td>
+                  <td>{$v.color}</td>
+                  <td>{$v.num}</td>
+                  <td>{$v.price}</td>
+                </tr>
+          {/foreach}
+          </table>
+      </form>
+    </div>
+
+
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+{/block}

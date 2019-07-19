@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1563244414;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\user\index.html";i:1563422700;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -45,8 +45,6 @@
             <th>用户名</th>
             <th>性别</th>
             <th>手机</th>
-            <th>邮箱</th>
-            <th>地址</th>
             <th>加入时间</th>
             <th>状态</th>
             <th>操作</th></tr>
@@ -58,8 +56,6 @@
             <td><?php echo $v['name']; ?></td>
             <td><?php echo $v['sex']; ?></td>
             <td><?php echo $v['phone']; ?></td>
-            <td><?php echo $v['mailbox']; ?></td>
-            <td><?php echo $v['address']; ?></td>
             <td><?php echo $v['ltime']; ?></td>
             <td class="td-status">
               <?php if($v['state']==0): ?>
@@ -122,7 +118,7 @@
                     ,dataType:'text'
                     ,success:function(data){
                         $(obj).attr('title','停用')
-                        $(obj).find('i').html('&#xe62f;');
+                        $(obj).find('i').html('&#xe601;');
 
                         $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').addClass('layui-btn-normal').html('已启用');
                         layer.msg('已启用!',{icon: 6,time:1000});
@@ -140,7 +136,7 @@
                     ,dataType:'text'
                     ,success:function(data){
                         $(obj).attr('title','启用')
-                        $(obj).find('i').html('&#xe601;');
+                        $(obj).find('i').html('&#xe62f;');
 
                         $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已禁用');
                         layer.msg('已禁用!',{icon: 5,time:1000});

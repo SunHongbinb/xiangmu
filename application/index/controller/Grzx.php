@@ -135,7 +135,7 @@ class Grzx extends Controller
   public function favorite(){
     $uid=$_SESSION['think']['user']['id'];
     $res=db('collect')->where('uid',$uid)->column('gid');
-    $a=db('goods')->where('id','in',$res)->paginate(15);
+    $a=db('goods')->where('id','in',$res)->paginate(1);
 
     //购物车商品数量
     $uid=$_SESSION['think']['user']['id'];

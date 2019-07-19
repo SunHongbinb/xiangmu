@@ -31,7 +31,7 @@
    <div class="wrap">
    <!--topLeftNav-->
    <!-- 判断是否已登录 -->
-   {if $Think.session.user.name==null}
+   {if empty($Think.session.user)}
     <ul class="topLtNav">
      <li>
          <a href="{:url('login/index')}" class=\"obviousText\">请登录</a>

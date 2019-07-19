@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:79:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\add.html";i:1563249777;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:79:"D:\phpStudy\PHPTutorial\WWW\erqi\public/../application/admin\view\type\add.html";i:1563249915;s:65:"D:\phpStudy\PHPTutorial\WWW\erqi\application\admin\view\base.html";i:1562921694;}*/ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -65,7 +65,7 @@
                     var index = parent.layer.getFrameIndex(window.name);
                     // 关闭当前frame
                     parent.layer.close(index);
-                    $("html").load("index.html");
+                    $('tbody').load();
                   });
                 }
                 ,error:function()

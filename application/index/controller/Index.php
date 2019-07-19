@@ -7,22 +7,22 @@ class Index extends Controller
 {
     public function index()
     {
-        if($_SESSION==null){
-            $banner=db('banner')->where('state',1)->order('id desc')->select();
-            $arr=db('type')->where('pid',0)->select();
+        if(empty($_SESSION['think']['user'])){
+            $banner=db('banner')->where('state','1')->order('id desc')->select();
+            $arr=db('type')->where('pid',0)->where('state','1')->select();
             foreach($arr as $k => $v){
               $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
             }
-            $goods=db('goods')->where('state',1)->order('id desc')->select();
-            $type=db('type')->where('pid',0)->where('state',1)->select();
+            $goods=db('goods')->where('state','1')->order('id desc')->select();
+            $type=db('type')->where('pid',0)->where('state','1')->select();
             foreach ($type as $k => $v) {
-                $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
+                $arr[$k]['zi']=db('type')->where('pid',$v['id'])->where('state','1')->select();
                 $list[$k]=array_slice($arr[$k]['zi'],8);
 
             }
-            $tid=db('type')->where('pid',0)->where('state',1)->column('id');
+            $tid=db('type')->where('pid',0)->where('state','1')->column('id');
             foreach($tid as $k=>$v){
-                $tid[$k]=db('type')->where('pid',$v)->column('id');
+                $tid[$k]=db('type')->where('pid',$v)->where('state','1')->column('id');
                 $gid[$k]=db('goods')->where('typeid','in',$tid[$k])->select();
                 // 取前十个值
                 $goodsid[$k]=array_slice($gid[$k],0,10);
@@ -31,19 +31,19 @@ class Index extends Controller
         }else{
             // dump($_SESSION);
             $uid=$_SESSION['think']['user']['id'];
-            $banner=db('banner')->where('state',1)->order('id desc')->select();
-            $arr=db('type')->where('pid',0)->select();
+            $banner=db('banner')->where('state','1')->order('id desc')->select();
+            $arr=db('type')->where('pid',0)->where('state','1')->select();
             foreach($arr as $k => $v){
               $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
             }
-            $goods=db('goods')->where('state',1)->order('id desc')->select();
-            $type=db('type')->where('pid',0)->where('state',1)->select();
+            $goods=db('goods')->where('state','1')->order('id desc')->select();
+            $type=db('type')->where('pid',0)->where('state','1')->select();
             foreach ($type as $k => $v) {
                 $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
                 $list[$k]=array_slice($arr[$k]['zi'],8);
 
             }
-            $tid=db('type')->where('pid',0)->where('state',1)->column('id');
+            $tid=db('type')->where('pid',0)->where('state','1')->column('id');
             foreach($tid as $k=>$v){
                 $tid[$k]=db('type')->where('pid',$v)->column('id');
                 $gid[$k]=db('goods')->where('typeid','in',$tid[$k])->select();
@@ -59,7 +59,7 @@ class Index extends Controller
 
     }
     public function read(){
-        $arr=db('type')->where('pid',0)->select();
+        $arr=db('type')->where('pid',0)->where('state','1')->select();
         foreach($arr as $k => $v){
           $arr[$k]['zi']=db('type')->where('pid',$v['id'])->select();
         }
